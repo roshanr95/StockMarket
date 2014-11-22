@@ -28,7 +28,10 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
-			<form method="get" action="Logger"><input type="hidden" name="action" value="logout"/><button type="submit" class="btn btn-default navbar-btn">Logout</button></form>
+			<form method="get" action="Logger">
+				<input type="hidden" name="action" value="logout" />
+				<button type="submit" class="btn btn-default navbar-btn">Logout</button>
+			</form>
 		</ul>
 	</div>
 	</nav>
@@ -39,7 +42,7 @@
 	<!--Rest of the content down here-->
 
 	<legend>Order Book</legend>
-	
+
 	<%
 		Integer[] resultint = new Integer[4];
 		String[] result = new String[4];
@@ -58,8 +61,9 @@
 			<div class="panel-heading" role="tab" id="headStocks">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
-						aria-expanded="true" aria-controls="Stocks"> Stocks </a>
-					<span class="badge" style="float:right"><%out.print(resultint[0]);%></span>
+						aria-expanded="true" aria-controls="Stocks"> Stocks </a> <span
+						class="badge" style="float: right"> <%out.print(resultint[0]);%>
+					</span>
 				</h4>
 			</div>
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
@@ -74,8 +78,8 @@
 				<h4 class="panel-title">
 					<a class="collapsed" data-toggle="collapse"
 						data-parent="#accordion" href="#Bonds" aria-expanded="false"
-						aria-controls="Bonds"> Bonds </a>
-					<span class="badge" style="float:right"><%out.print(resultint[1]);%></span>
+						aria-controls="Bonds"> Bonds </a> <span class="badge"
+						style="float: right"> <%out.print(resultint[1]);%> </span>
 				</h4>
 			</div>
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
@@ -90,8 +94,8 @@
 				<h4 class="panel-title">
 					<a class="collapsed" data-toggle="collapse"
 						data-parent="#accordion" href="#MFunds" aria-expanded="false"
-						aria-controls="MFunds"> Mutual Funds </a>
-					<span class="badge" style="float:right"><%out.print(resultint[2]);%></span>
+						aria-controls="MFunds"> Mutual Funds </a> <span class="badge"
+						style="float: right"> <%out.print(resultint[2]);%> </span>
 				</h4>
 			</div>
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
@@ -106,8 +110,8 @@
 				<h4 class="panel-title">
 					<a class="collapsed" data-toggle="collapse"
 						data-parent="#accordion" href="#FDs" aria-expanded="false"
-						aria-controls="FDs"> Fixed Deposits </a>
-					<span class="badge" style="float:right"><%out.print(resultint[3]);%></span>
+						aria-controls="FDs"> Fixed Deposits </a> <span class="badge"
+						style="float: right"> <%out.print(resultint[3]);%> </span>
 				</h4>
 			</div>
 			<div id="FDs" class="panel-collapse collapse" role="tabpanel"

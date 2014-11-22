@@ -26,8 +26,7 @@
 			<li><a href="Portfolio.jsp">Portfolio</a></li>
 			<li><a href="Transact.jsp">Transact</a></li>
 			<li class="active"><a href="#">Transaction History <span
-					class="sr-only">(current)</span>
-			</a></li>
+					class="sr-only">(current)</span> </a></li>
 			<li><a href="OrderBook.jsp">Order Book</a></li>
 			<li><a href="Market.jsp">Market Statistics</a></li>
 		</ul>
@@ -90,16 +89,13 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
 						aria-expanded="true" aria-controls="Stocks"> Stocks <span
-						class="badge badge-inverse" style="margin-left: 1%">
-							<%
+						class="badge badge-inverse" style="margin-left: 1%"> <%
 								if (session.getAttribute("stock") != null) {
 									String res = (String) session.getAttribute("stock");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
@@ -158,16 +154,13 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Bonds"
 						aria-expanded="false" aria-controls="Bonds"> Bonds <span
-						class="badge badge-inverse" style="margin-left: 1%">
-							<%
+						class="badge badge-inverse" style="margin-left: 1%"> <%
 								if (session.getAttribute("bond") != null) {
 									String res = (String) session.getAttribute("bond");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
@@ -226,16 +219,13 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#MFunds"
 						aria-expanded="false" aria-controls="MFunds"> Mutual Funds <span
-						class="badge badge-inverse" style="align: right">
-							<%
+						class="badge badge-inverse" style="align: right"> <%
 								if (session.getAttribute("mf") != null) {
 									String res = (String) session.getAttribute("mf");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
@@ -294,16 +284,13 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#FD"
 						aria-expanded="false" aria-controls="FD"> Fixed Deposits <span
-						class="badge badge-inverse" style="align: right">
-							<%
+						class="badge badge-inverse" style="align: right"> <%
 								if (session.getAttribute("fd") != null) {
 									String res = (String) session.getAttribute("fd");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="FD" class="panel-collapse collapse" role="tabpanel"

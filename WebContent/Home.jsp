@@ -16,8 +16,8 @@
 			Virtual Stock Market <small>Your Guide to the Wall Street</small>
 		</h1>
 	</legend>
-	
-		
+
+
 	<%
 		if (request.getParameter("res") == null) ;
 		else if (request.getParameter("res").equals("warning")) out.println("<div class=\"alert alert-warning\" role=\"alert\">Username has been taken.</div>");
@@ -25,12 +25,13 @@
 		else if (request.getParameter("res").equals("error")) out.println("<div class=\"alert alert-danger\" role=\"alert\">User does not exist!</div>");
 		else if (request.getParameter("res").equals("error2")) out.println("<div class=\"alert alert-danger\" role=\"alert\">User/Password does not match!</div>");
 	%>
-	
+
 	<div>
 		<div style="display: inline-block; width: 45%">
 			<h2>Login</h2>
-			<form class="form-horizontal" role="form" action="Logger" method="get">
-				<input type="hidden" name="action" value="login"/>
+			<form class="form-horizontal" role="form" action="Logger"
+				method="get">
+				<input type="hidden" name="action" value="login" />
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Username</label>
 					<div class="col-sm-6">
@@ -53,7 +54,8 @@
 
 		<div style="display: inline-block; width: 45%">
 			<h2>Register</h2>
-			<form class="form-horizontal" role="form" action="Logger" method="post">
+			<form class="form-horizontal" role="form" action="Logger"
+				method="post">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-6">
@@ -86,7 +88,7 @@
 			</form>
 		</div>
 	</div>
-	
+
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>
 </body>
