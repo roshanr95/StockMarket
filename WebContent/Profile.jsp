@@ -16,7 +16,11 @@
 	</div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<% if(session.getAttribute("username") != null) out.println("<p class=\"navbar-text\"><strong>Hello "+session.getAttribute("username")+"</strong></p>");%>
+		<%
+			if (session.getAttribute("username") != null)
+				out.println("<p class=\"navbar-text\"><strong>Hello "
+						+ session.getAttribute("username") + "</strong></p>");
+		%>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Profile <span class="sr-only">(current)</span>
 			</a></li>
@@ -28,7 +32,10 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
-			<form method="get" action="Logger"><input type="hidden" name="action" value="logout"/><button type="submit" class="btn btn-default navbar-btn">Logout</button></form>
+			<form method="get" action="Logger">
+				<input type="hidden" name="action" value="logout" />
+				<button type="submit" class="btn btn-default navbar-btn">Logout</button>
+			</form>
 		</ul>
 	</div>
 	</nav>
@@ -39,9 +46,129 @@
 	<!--Rest of the content down here-->
 
 	<legend>Profile</legend>
-	<br>
-	
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>
+	<h1>
+		<small>Welcome <%=session.getAttribute("username")%></small>
+	</h1>
+	<br />
+
+	<div style="display: inline-block; width: 49%">
+		<h3 style="margin-left: 20%">Edit Personal Details</h3>
+		<br />
+		<form action="ChangeDetails" method="post" class="form-horizontal"
+			role="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-6">
+					<input type="text" name="name" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-6">
+					<input type="email" name="email" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+	<div style="display: inline-block; width: 49%">
+		<h3 style="margin-left: 20%">Change Password</h3>
+		<br />
+		<form action="ChangeDetails" method="post" class="form-horizontal"
+			role="form">
+			<div
+				class="form-group <%if (request.getParameter("res2") == null)
+				;
+			else if (request.getParameter("res2").equals("invpw"))
+				out.println("has-error");%> ">
+				<label class="col-sm-2 control-label">Old Password</label>
+				<div class="col-sm-6">
+					<input type="password" name="oldpw" class="form-control">
+				</div>
+			</div>
+			<div
+				class="form-group <%if (request.getParameter("res2") == null)
+				;
+			else if (request.getParameter("res2").equals("nomatch"))
+				out.println("has-warning");%> ">
+				<label class="col-sm-2 control-label">New Password</label>
+				<div class="col-sm-6">
+					<input type="password" name="newpw" class="form-control">
+				</div>
+			</div>
+			<div
+				class="form-group <%if (request.getParameter("res2") == null)
+				;
+			else if (request.getParameter("res2").equals("nomatch"))
+				out.println("has-warning");%> ">
+				<label class="col-sm-2 control-label">Confirm Password</label>
+				<div class="col-sm-6">
+					<input type="password" name="confpw" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<%
+		if (request.getParameter("res1") == null)
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert\" role=\"alert\"></div>");
+		else if (request.getParameter("res1").equals("success"))
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert alert-success\" role=\"alert\"><strong>Done!</strong></div>");
+	%>
+	<%
+		if (request.getParameter("res2") == null)
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert\" role=\"alert\"></div>");
+		else if (request.getParameter("res2").equals("invpw"))
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert alert-danger\" role=\"alert\">Invalid Password</div>");
+		else if (request.getParameter("res2").equals("success"))
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert alert-success\" role=\"alert\"><strong>Done!</strong></div>");
+		else if (request.getParameter("res2").equals("nomatch"))
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert alert-warning\" role=\"alert\">Passwords do not match</div>");
+	%>
+
+	
+	<div
+		<%if (session.getAttribute("username") != null
+					&& session.getAttribute("username").equals("admin")) {
+				out.println("");
+			} else {
+				out.println("class=\"hide\"");
+			}%>
+		style="display: inline-block; width: 45%">
+		<h3 style="margin-left: 20%">Change Game Parameters</h3>
+		<br />
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">FD Rate</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-6">
+					<input type="email" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
