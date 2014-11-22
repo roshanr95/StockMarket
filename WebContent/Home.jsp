@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="bootstrap.css">
 </head>
 <body style="margin-left: 5%; margin-right: 5%">
-
+	<br><br><br>
+	<legend><h1>Virtual Stock Market</h1></legend>
+	
 	<div style="display: inline-block; width: 45%">
 		<h2>Login</h2>
 		<form class="form-horizontal" role="form">
