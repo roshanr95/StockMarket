@@ -4,6 +4,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,12 +52,12 @@ public class Logger extends HttpServlet {
 			
 			PreparedStatement p;
 			try {
-				p = conn.prepareStatement("select * from users where userid = ?");
+				p = conn.prepareStatement("select password from users where userid = ?");
 				p.setString(1,username);
 				ResultSet rs = p.executeQuery();
 				if(rs.next()) {
-					if(rs.getString(6).equals(password)) {
-						session.setAttribute("username", username); 
+					if(rs.getString(1).equals(password)) {
+						session.setAttribute("username", username);
 						response.sendRedirect("Profile.jsp");
 					}
 					else response.sendRedirect("Home.jsp?res=error2");
@@ -88,9 +93,9 @@ public class Logger extends HttpServlet {
 			String result;
 			
 			if(!rs.next()){
-				PreparedStatement p2 = conn.prepareStatement("insert into users values(?,?,10000,10000,?,?)");
-				p2.setString(1,username); 
-				p2.setString(2,name); 
+				PreparedStatement p2 = conn.prepareStatement("insert into users values(?,?,10000,?,?)");
+				p2.setString(1,username);
+				p2.setString(2,name);
 				p2.setString(3,email);
 				p2.setString(4, password);
 				p2.executeUpdate();
@@ -102,5 +107,4 @@ public class Logger extends HttpServlet {
 			System.out.println(e);
 		}
 	}
-
 }

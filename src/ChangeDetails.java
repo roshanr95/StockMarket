@@ -60,7 +60,6 @@ public class ChangeDetails extends HttpServlet {
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
 				String pw = rs.getString(1);
-				System.out.println(pw + " " + oldpw + " " + newpw + " " + confpw);
 				if(oldpw.equals(pw))
 					if(newpw.equals(confpw)) {
 						stmt = conn.prepareStatement("update users set password = ? where userid = ?;");
