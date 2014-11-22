@@ -19,7 +19,7 @@ public class ChangeDetails extends HttpServlet {
 		//Open the connection here
 
 		String db = "jdbc:postgresql://localhost/stockmarket";
-		String user = "120050021";
+		String user = "karan";
 		String pass = "balr()ck94";
 
 		try {

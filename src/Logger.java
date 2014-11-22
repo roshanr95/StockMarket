@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,7 @@ public class Logger extends HttpServlet {
 		//Open the connection here
 
 		String db = "jdbc:postgresql://localhost/stockmarket";
-		String user = "120050021";
+		String user = "karan";
 		String pass = "balr()ck94";
 
 		try {
@@ -40,7 +42,32 @@ public class Logger extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String name=request.getParameter("name");
+		String username=request.getParameter("username");
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
+		
+		try {
+			PreparedStatement p = conn.prepareStatement("select * from users where userid = ?");
+			p.setString(1,username);
+			ResultSet rs = p.executeQuery();
+			String result;
+			
+			if(!rs.next()){
+				PreparedStatement p2 = conn.prepareStatement("insert into users values(?,?,10000,10000,?,?)");
+				p2.setString(1,username); 
+				p2.setString(2,name); 
+				p2.setString(3,email);
+				p2.setString(4, password);
+				p2.executeUpdate();
+				result="success";
+			}
+			else result="warning";
+			response.sendRedirect("Home.jsp?res="+result);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }

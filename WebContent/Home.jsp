@@ -8,67 +8,83 @@
 <link rel="stylesheet" href="bootstrap.css">
 </head>
 <body style="margin-left: 5%; margin-right: 5%">
-	<br><br><br>
-	<legend><h1>Virtual Stock Market</h1></legend>
+	<br>
+	<br>
+	<br>
+	<legend>
+		<h1>
+			Virtual Stock Market <small>Your Guide to the Wall Street</small>
+		</h1>
+	</legend>
 	
-	<div style="display: inline-block; width: 45%">
-		<h2>Login</h2>
-		<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Username</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control">
+		
+	<%
+		if (request.getParameter("res") == null) ;
+		else if (request.getParameter("res").equals("warning")) out.println("<div class=\"panel panel-warning\"><div class=\"panel-body\">Username has been taken.</div></div>");
+		else if (request.getParameter("res").equals("success")) out.println("<div class=\"panel panel-success\"><div class=\"panel-body\">User created!</div></div>");
+	%>
+	
+	<div>
+		<div style="display: inline-block; width: 45%">
+			<h2>Login</h2>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Username</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-6">
-					<input type="password" class="form-control">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-6">
+						<input type="password" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Login</button>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 
-	<div style="display: inline-block; width: 45%">
-		<h2>Register</h2>
-		<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Name</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control">
+		<div style="display: inline-block; width: 45%">
+			<h2>Register</h2>
+			<form class="form-horizontal" role="form" action="Logger"
+				method="post">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-6">
+						<input name="name" type="text" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-6">
-					<input type="email" class="form-control">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-6">
+						<input name="email" type="email" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Username</label>
-				<div class="col-sm-6">
-					<input type="password" class="form-control">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Username</label>
+					<div class="col-sm-6">
+						<input name="username" type="text" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-6">
-					<input type="password" class="form-control">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Password</label>
+					<div class="col-sm-6">
+						<input name="password" type="password" class="form-control">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Register</button>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Register</button>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
-
+	
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>
 </body>
