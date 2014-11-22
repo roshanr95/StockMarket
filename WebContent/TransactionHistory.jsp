@@ -90,7 +90,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
 						aria-expanded="true" aria-controls="Stocks"> Stocks <span
-						class="badge badge-inverse" style="margin-left: 1%"> <%
+						class="badge badge-inverse" style="float:right"> <%
 								if (session.getAttribute("stock") != null) {
 									String res = (String) session.getAttribute("stock");
 									String[] toparr = res.split(";");
@@ -104,11 +104,11 @@
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
 				aria-labelledby="headStocks">
 				<div class="panel-body">
-					<button type="button" class="btn btn-danger">Failed
+					<button type="button" class="btn btn-danger" disabled="disabled">Failed
 						Transaction</button>
-					<button type="button" class="btn btn-success">Successful
+					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
-					<button type="button" class="btn btn-info">Successful Buy</button>
+					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
 					<table class="table" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
@@ -154,7 +154,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Bonds"
 						aria-expanded="false" aria-controls="Bonds"> Bonds <span
-						class="badge badge-inverse" style="margin-left: 1%"> <%
+						class="badge badge-inverse" style="float:right"> <%
 								if (session.getAttribute("bond") != null) {
 									String res = (String) session.getAttribute("bond");
 									String[] toparr = res.split(";");
@@ -168,11 +168,11 @@
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headBonds">
 				<div class="panel-body">
-					<button type="button" class="btn btn-danger">Failed
+					<button type="button" class="btn btn-danger" disabled="disabled">Failed
 						Transaction</button>
-					<button type="button" class="btn btn-success">Successful
+					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
-					<button type="button" class="btn btn-info">Successful Buy</button>
+					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
 					<table class="table" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
@@ -218,7 +218,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#MFunds"
 						aria-expanded="false" aria-controls="MFunds"> Mutual Funds <span
-						class="badge badge-inverse" style="align: right"> <%
+						class="badge badge-inverse" style="float:right"> <%
 								if (session.getAttribute("mf") != null) {
 									String res = (String) session.getAttribute("mf");
 									String[] toparr = res.split(";");
@@ -232,11 +232,11 @@
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headMFunds">
 				<div class="panel-body">
-					<button type="button" class="btn btn-danger">Failed
+					<button type="button" class="btn btn-danger" disabled="disabled">Failed
 						Transaction</button>
-					<button type="button" class="btn btn-success">Successful
+					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
-					<button type="button" class="btn btn-info">Successful Buy</button>
+					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
 					<table class="table" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
@@ -282,7 +282,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#FD"
 						aria-expanded="false" aria-controls="FD"> Fixed Deposits <span
-						class="badge badge-inverse" style="align: right"> <%
+						class="badge badge-inverse" style="float:right"> <%
 								if (session.getAttribute("fd") != null) {
 									String res = (String) session.getAttribute("fd");
 									String[] toparr = res.split(";");
@@ -296,7 +296,7 @@
 			<div id="FD" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headFD">
 				<div class="panel-body">
-					<button type="button" class="btn btn-danger">Broken Fixed
+					<button type="button" class="btn btn-danger" disabled="disabled">Broken Fixed
 						Deposit</button>
 					<table class="table" style="margin-top: 1%">
 						<tr>
