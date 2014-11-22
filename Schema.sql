@@ -118,3 +118,4 @@ create table transact_history
  CREATE INDEX userid_fd ON fd_table (userid);
  CREATE INDEX userid_fdhist ON fd_history (userid);
  CREATE INDEX day_fdhist ON fd_history (day_of_issue);
+ insert into users values('admin','admin','99999999999','9999999999','admin@gmail.com','admin');
