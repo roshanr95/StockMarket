@@ -23,8 +23,8 @@
         <li class="active"><a href="#">Market Statistics<span class="sr-only">(current)</span></a></li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <button style="margin-right:30%" type="button" class="btn btn-default navbar-btn">Logout</button>
+      <ul class="nav navbar-nav navbar-right" style="margin-right:1%">
+        <button type="button" class="btn btn-default navbar-btn">Logout</button>
       </ul>
     </div>
   </nav>

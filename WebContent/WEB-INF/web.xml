@@ -19,4 +19,14 @@
     <servlet-name>Logger</servlet-name>
     <url-pattern>/Logger</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ChangeDetails</display-name>
+    <servlet-name>ChangeDetails</servlet-name>
+    <servlet-class>ChangeDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeDetails</servlet-name>
+    <url-pattern>/ChangeDetails</url-pattern>
+  </servlet-mapping>
 </web-app>
