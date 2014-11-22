@@ -40,7 +40,7 @@
 	<legend>Market Statistics</legend>
 
 	<form class="form-inline" role="form">
-		<select class="form-control">
+		<select class="form-control" name="company">
 			<!--<option>xyz</option> here-->
 		</select>
 		<button type="submit" class="btn btn-default">Check Statistics</button>
