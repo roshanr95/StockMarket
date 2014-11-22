@@ -41,7 +41,7 @@ create table stock_history
 create table ownership
 	(userid		varchar(20),
 	 ticker_symbol varchar(10) not null, 
-	 invest_type  varchar(2) check(ticker_symbol in ('B','S','MF')),
+	 invest_type  varchar(2) check(invest_type in ('B','S','MF')),
 	 quantity  numeric(12,0) check (quantity >= 0),
 	 primary key (userid,ticker_symbol,invest_type),
 	 foreign key (userid) references users on delete set null,
@@ -77,7 +77,7 @@ create table curr_transact
 	(trans_id 	numeric(20,0) not null,
 	 userid  varchar(20) not null,
 	 ticker_symbol varchar(10),
-	 invest_type varchar(2) check(ticker_symbol in ('B','S','MF')),
+	 invest_type varchar(2) check(invest_type in ('B','S','MF')),
 	 trans_type varchar(1) check(trans_type in ('B','S')),
 	 price numeric(10,2),
 	 quantity numeric(12,0),
@@ -91,12 +91,12 @@ create table transact_history
 	(trans_id 	numeric(20,0) not null,
 	 userid  varchar(20) not null,
 	 ticker_symbol varchar(10),
-	 invest_type varchar(2) check(ticker_symbol in ('B','S','MF')),
+	 invest_type varchar(2) check(invest_type in ('B','S','MF')),
 	 trans_type varchar(1) check(trans_type in ('B','S')),
 	 price numeric(10,2),
 	 quantity numeric(12,0),
 	 time timestamp,
-	 success_trans varchar(1) check (success_trans in ('y','n')),
+	 success_trans varchar(1) check (success_trans in ('Y','N')),
 	 primary key (trans_id),
 	 foreign key (userid) references users
 		on delete set null,
@@ -104,7 +104,7 @@ create table transact_history
 	);
  create table game_params
  	( game_param varchar(20),
- 	  value numeric(10,3),
+ 	  value varchar(20),
  	  primary key (game_param)
  	);
  create table fd_rates
@@ -119,3 +119,11 @@ create table transact_history
  CREATE INDEX userid_fdhist ON fd_history (userid);
  CREATE INDEX day_fdhist ON fd_history (day_of_issue);
  insert into users values('admin','admin','99999999999','9999999999','admin@gmail.com','admin');
+ insert into users values('sanket','sanket','100000','100000','sanket1729@gmail.com','sanket');
+ insert into users values('karan','karan','100000','100000','sanket1729@gmail.com','karan');
+ insert into users values('rosh','rosh','100000','100000','sanket1729@gmail.com','rosh');
+ insert into company values('ABC','ABC inc.','120.2');
+ insert into company values('XYZ','XYZ inc.','220.2');
+ insert into company values('DEF','DEF inc.','20.2');
+ insert into game_params values('fd_no','10000');
+ insert into game_params values('trans_no','100000');
