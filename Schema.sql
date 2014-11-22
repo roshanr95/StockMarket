@@ -94,7 +94,7 @@ create table curr_transact
 create table transact_history
 	(trans_id 	numeric(20,0) not null,
 	 userid  varchar(20) not null,
-	 ticker_symbol char(10),
+	 ticker_symbol char(9),
 	 invest_type varchar(2) check(invest_type in ('B','S','MF')),
 	 trans_type varchar(1) check(trans_type in ('B','S')),
 	 price numeric(10,2),
