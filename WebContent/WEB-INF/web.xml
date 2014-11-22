@@ -29,4 +29,34 @@
     <servlet-name>ChangeDetails</servlet-name>
     <url-pattern>/ChangeDetails</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewTransaction</display-name>
+    <servlet-name>NewTransaction</servlet-name>
+    <servlet-class>NewTransaction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewTransaction</servlet-name>
+    <url-pattern>/NewTransaction</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MarketStats</display-name>
+    <servlet-name>MarketStats</servlet-name>
+    <servlet-class>MarketStats</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarketStats</servlet-name>
+    <url-pattern>/MarketStats</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PastTransactions</display-name>
+    <servlet-name>PastTransactions</servlet-name>
+    <servlet-class>PastTransactions</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PastTransactions</servlet-name>
+    <url-pattern>/PastTransactions</url-pattern>
+  </servlet-mapping>
 </web-app>
