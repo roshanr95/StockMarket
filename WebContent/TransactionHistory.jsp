@@ -90,8 +90,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
 						aria-expanded="true" aria-controls="Stocks"> Stocks <span
-						class="badge badge-inverse" style="margin-left: 1%">
-							<%
+						class="badge badge-inverse" style="margin-left: 1%"> <%
 								if (session.getAttribute("stock") != null) {
 									String res = (String) session.getAttribute("stock");
 									String[] toparr = res.split(";");
@@ -126,10 +125,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr "
-											+ (resArr[6].equals("N") ? "class=\"danger\""
-													: (resArr[2].equals("B") ? "class=\"info\""
-															: "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -158,8 +154,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Bonds"
 						aria-expanded="false" aria-controls="Bonds"> Bonds <span
-						class="badge badge-inverse" style="margin-left: 1%">
-							<%
+						class="badge badge-inverse" style="margin-left: 1%"> <%
 								if (session.getAttribute("bond") != null) {
 									String res = (String) session.getAttribute("bond");
 									String[] toparr = res.split(";");
@@ -194,10 +189,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr "
-											+ (resArr[6].equals("N") ? "class=\"danger\""
-													: (resArr[2].equals("B") ? "class=\"info\""
-															: "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -226,8 +218,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#MFunds"
 						aria-expanded="false" aria-controls="MFunds"> Mutual Funds <span
-						class="badge badge-inverse" style="align: right">
-							<%
+						class="badge badge-inverse" style="align: right"> <%
 								if (session.getAttribute("mf") != null) {
 									String res = (String) session.getAttribute("mf");
 									String[] toparr = res.split(";");
@@ -262,10 +253,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr "
-											+ (resArr[6].equals("N") ? "class=\"danger\""
-													: (resArr[2].equals("B") ? "class=\"info\""
-															: "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -285,7 +273,7 @@
 			}
 		%>
 		<%
-			if (session.getAttribute("mf") == null) {
+			if (session.getAttribute("fd") == null) {
 				out.println("<!--");
 			}
 		%>
@@ -294,8 +282,7 @@
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#FD"
 						aria-expanded="false" aria-controls="FD"> Fixed Deposits <span
-						class="badge badge-inverse" style="align: right">
-							<%
+						class="badge badge-inverse" style="align: right"> <%
 								if (session.getAttribute("fd") != null) {
 									String res = (String) session.getAttribute("fd");
 									String[] toparr = res.split(";");
@@ -309,20 +296,16 @@
 			<div id="FD" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headFD">
 				<div class="panel-body">
-					<button type="button" class="btn btn-danger">Failed
-						Transaction</button>
-					<button type="button" class="btn btn-success">Successful
-						Sell</button>
-					<button type="button" class="btn btn-info">Successful Buy</button>
+					<button type="button" class="btn btn-danger">Broken Fixed
+						Deposit</button>
 					<table class="table" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
-							<th>Ticker</th>
-							<th>Kind</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th>Time Stamp</th>
-							<th>Successful</th>
+							<th>Amount</th>
+							<th>Day of Issue</th>
+							<th>Interest Rate</th>
+							<th>Duration</th>
+							<th>Broken</th>
 						</tr>
 						<%
 							if (session.getAttribute("fd") != null) {
@@ -330,10 +313,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr "
-											+ (resArr[6].equals("N") ? "class=\"danger\""
-													: (resArr[2].equals("B") ? "class=\"info\""
-															: "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[5].equals("N") ? "class=\"danger\"" : "") + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
