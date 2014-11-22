@@ -16,6 +16,7 @@
 	</div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<% if(session.getAttribute("username") != null) out.println("<p class=\"navbar-text\"><strong>Hello "+session.getAttribute("username")+"</strong></p>");%>
 		<ul class="nav navbar-nav">
 			<li><a href="Profile.jsp">Profile</a></li>
 			<li class="active"><a href="#">Portfolio <span
@@ -27,7 +28,7 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
-			<button type="button" class="btn btn-default navbar-btn">Logout</button>
+			<form method="get" action="Logger"><input type="hidden" name="action" value="logout"/><button type="submit" class="btn btn-default navbar-btn">Logout</button></form>
 		</ul>
 	</div>
 	</nav>

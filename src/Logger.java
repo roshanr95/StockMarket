@@ -3,11 +3,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //This java file will serve get requests for both logging in, logging out and registering
 
@@ -35,7 +37,38 @@ public class Logger extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String action = request.getParameter("action");
+		HttpSession session = request.getSession(false);
+		
+		if(action.equals("login")){
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			
+			PreparedStatement p;
+			try {
+				p = conn.prepareStatement("select * from users where userid = ?");
+				p.setString(1,username);
+				ResultSet rs = p.executeQuery();
+				if(rs.next()) {
+					if(rs.getString(6).equals(password)) {
+						session.setAttribute("username", username); 
+						response.sendRedirect("Profile.jsp");
+					}
+					else response.sendRedirect("Home.jsp?res=error2");
+				}
+				else response.sendRedirect("Home.jsp?res=error");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		else if(action.equals("logout")){
+			session.setAttribute("username",null);
+			response.sendRedirect("Home.jsp");
+		}
+		
 	}
 
 	/**
