@@ -127,6 +127,26 @@ public class PastTransactions extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("select * from fd_history where userid = ? and day_of_issue between ? and ?;");
+			stmt.setString(1, user);
+			stmt.setTimestamp(2, startt);
+			stmt.setTimestamp(3, endt);
+			ResultSet rs = stmt.executeQuery();
+			String res="";
+			
+			while(rs.next()) {
+				String r = String.valueOf(rs.getInt(1)) + "," + String.valueOf(rs.getFloat(3)) + "," + rs.getDate(4) + "," +
+							String.valueOf(rs.getFloat(5)) + "," + rs.getObject(6) + "," + rs.getString(7);
+				res = res + r + ";";
+			}
+			System.out.println(res);
+			session.setAttribute("fd", res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 		response.sendRedirect("TransactionHistory.jsp?res=success");
 	}
