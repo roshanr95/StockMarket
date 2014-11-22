@@ -45,53 +45,65 @@
 
 	<legend>Transact</legend>
 
-	<br><b>Stock investments</b>
-	<form class="form-inline" role="form">
-	<br>Choose the company where you wish to invest<br>
-		<select class="form-control" name="stock_company">
+	<br>
+	<b>Stock investments</b>
+	<form class="form-inline" role="form" action="NewTransaction" method ="post">
+		<br>Choose the company where you wish to invest<br> <select
+			class="form-control" name="stock_company">
 			<!--<option>xyz</option> here-->
-		</select> 
-		<br>Choose the quantity you wish to invest<br>
-		 <input type="text"
-			name="stock_quantity">
+		</select> <select class="form-control" name="stock_type">
+			<option>buy</option>
+			<option>sell</option>
+		</select> <br>Choose the quantity you wish to invest<br> <input
+			type="text" name="stock_quantity">
 		<button type="submit" class="btn btn-default">Submit</button>
+		<input type="hidden" name="classify" value="stock">
 	</form>
-	
-		<br><b>Mutual Funds</b>
-	<form class="form-inline" role="form">
-	<br>Choose the company where you wish to invest<br>
-		<select class="form-control" name="mf_company">
+
+	<br>
+	<b>Mutual Funds</b>
+	<form class="form-inline" role="form" action="NewTransaction" method ="post">
+		<br>Choose the company where you wish to invest<br> <select
+			class="form-control" name="mf_company">
 			<!--<option>xyz</option> here-->
-		</select> 
-		<br>Choose the quantity you wish to invest<br>
-		 <input type="text"
-			name="mf_quantity">
+		</select> <select class="form-control" name="mf_type">
+			<option>buy</option>
+			<option>sell</option>
+		</select> <br>Choose the quantity you wish to invest<br> <input
+			type="text" name="mf_quantity">
 		<button type="submit" class="btn btn-default">Submit</button>
+		<input type="hidden" name="classify" value="mf">
 	</form>
-	
-		<br><b>Bonds</b>
-	<form class="form-inline" role="form">
-	<br>Choose the company where you wish to invest<br>
-		<select class="form-control" name="bonds_company">
+
+	<br>
+	<b>Bonds</b>
+	<form class="form-inline" role="form" action="NewTransaction" method ="post">
+		<br>Choose the company where you wish to invest<br> <select
+			class="form-control" name="bonds_type">
+			<option>buy</option>
+			<option>sell</option>
+		</select> <select class="form-control" name="bonds_company">
 			<!--<option>xyz</option> here-->
-		</select> 
-		<br>Choose the quantity you wish to invest<br>
-		 <input type="text"
-			name="bonds_quantity">
+		</select> <br>Choose the quantity you wish to invest<br> <input
+			type="text" name="bonds_quantity">
 		<button type="submit" class="btn btn-default">Submit</button>
+		<input type="hidden" name="classify" value="bonds">
 	</form>
-	
-	
-	<br><b>Fixed deposit</b>
-	<form class="form-inline" role="form">
-	<br>Choose the investment period<br>
-		<select class="form-control" name="fd_period">
-			<!--<option>xyz</option> here-->
-		</select> 
-		<br>Choose the amount you wish to invest<br>
-		 <input type="text"
-			name="fd_amount">
+
+
+	<br>
+	<b>Fixed deposit</b>
+	<form class="form-inline" role="form" action="NewTransaction" method ="post">
+		<select class="form-control" name="fd_type">
+			<option>Buy FD</option>
+			<option>Break FD</option>
+		</select> <br>Enter your FD ID if you wish to break it<br> <input
+			type="text" name="break_fd"> <br>Choose the investment
+		period<br> <select class="form-control" name="fd_period">
+		</select> <br>Choose the amount you wish to invest<br> <input
+			type="text" name="fd_amount">
 		<button type="submit" class="btn btn-default">Submit</button>
+		<input type="hidden" name="classify" value="fd">
 	</form>
 
 	<script src="jquery.js"></script>
