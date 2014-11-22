@@ -20,24 +20,27 @@
 		
 	<%
 		if (request.getParameter("res") == null) ;
-		else if (request.getParameter("res").equals("warning")) out.println("<div class=\"panel panel-warning\"><div class=\"panel-body\">Username has been taken.</div></div>");
-		else if (request.getParameter("res").equals("success")) out.println("<div class=\"panel panel-success\"><div class=\"panel-body\">User created!</div></div>");
+		else if (request.getParameter("res").equals("warning")) out.println("<div class=\"alert alert-warning\" role=\"alert\">Username has been taken.</div>");
+		else if (request.getParameter("res").equals("success")) out.println("<div class=\"alert alert-success\" role=\"alert\"><strong>User created!</strong></div>");
+		else if (request.getParameter("res").equals("error")) out.println("<div class=\"alert alert-danger\" role=\"alert\">User does not exist!</div>");
+		else if (request.getParameter("res").equals("error2")) out.println("<div class=\"alert alert-danger\" role=\"alert\">User/Password does not match!</div>");
 	%>
 	
 	<div>
 		<div style="display: inline-block; width: 45%">
 			<h2>Login</h2>
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" action="Logger" method="get">
+				<input type="hidden" name="action" value="login"/>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Username</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control">
+						<input name="username" type="text" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-6">
-						<input type="password" class="form-control">
+						<input name="password" type="password" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">
@@ -50,8 +53,7 @@
 
 		<div style="display: inline-block; width: 45%">
 			<h2>Register</h2>
-			<form class="form-horizontal" role="form" action="Logger"
-				method="post">
+			<form class="form-horizontal" role="form" action="Logger" method="post">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-6">
