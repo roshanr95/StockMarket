@@ -122,7 +122,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr "
+									out.println("<tr " 
 											+ (resArr[6].equals("N") ? "class=\"danger\""
 													: (resArr[2].equals("B") ? "class=\"info\""
 															: "class=\"success\"")) + ">");
@@ -275,7 +275,7 @@
 			}
 		%>
 		<%
-			if (session.getAttribute("mf") == null) {
+			if (session.getAttribute("fd") == null) {
 				out.println("<!--");
 			}
 		%>
