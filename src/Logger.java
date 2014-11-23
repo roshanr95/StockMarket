@@ -58,12 +58,20 @@ public class Logger extends HttpServlet {
 				if(rs.next()) {
 					if(rs.getString(1).equals(password)) {
 						
-						String str="";
+						String str="<optgroup label=\"Stocks\">";
 						p=conn.prepareStatement("select ticker_symbol,name from company");
 						ResultSet rs2 = p.executeQuery();
-						while(rs2.next()) str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
-						session.setAttribute("companies",str);
-						
+						while(rs2.next() && rs2.getString(1).substring(0,3).equals("BOM")) {
+							str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+						}
+						str+="</optgroup>";
+						session.setAttribute("companiesstock",str);
+						str="<optgroup label=\"Mutual Funds\"><option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+						while(rs2.next()) {
+							str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+						}
+						str+="</optgroup>";
+						session.setAttribute("companiesmf",str);					
 						session.setAttribute("username", username);
 						response.sendRedirect("Profile.jsp");
 					}
