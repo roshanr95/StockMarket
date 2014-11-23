@@ -45,13 +45,17 @@
 	<!--Rest of the content down here-->
 
 	<legend>Transact</legend>
-
+	<%
+		if (request.getParameter("res") == null) ;
+		else if (request.getParameter("res").equals("funds")) out.println("<div class=\"alert alert-warning\" role=\"alert\">You don't have sufficent funds!.</div>");
+		else if (request.getParameter("res").equals("stocks")) out.println("<div class=\"alert alert-warning\" role=\"alert\">You don't posses the required amount of shares!</div>");
+	%>
 	<br>
 	<b>Stock investments</b>
 	<form class="form-inline" role="form" action="NewTransaction" method ="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="stock_company">
-			<!--<option>xyz</option> here-->
+			<option>ABC</option>
 		</select> <select class="form-control" name="stock_type">
 			<option>buy</option>
 			<option>sell</option>
@@ -66,7 +70,7 @@
 	<form class="form-inline" role="form" action="NewTransaction" method ="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="mf_company">
-			<!--<option>xyz</option> here-->
+			<option>DEF</option>
 		</select> <select class="form-control" name="mf_type">
 			<option>buy</option>
 			<option>sell</option>
@@ -84,7 +88,7 @@
 			<option>buy</option>
 			<option>sell</option>
 		</select> <select class="form-control" name="bonds_company">
-			<!--<option>xyz</option> here-->
+			<option>XYZ</option>
 		</select> <br>Choose the quantity you wish to invest<br> <input
 			type="text" name="bonds_quantity">
 		<button type="submit" class="btn btn-default">Submit</button>
