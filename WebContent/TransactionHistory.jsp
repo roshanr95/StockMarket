@@ -28,7 +28,7 @@
 			<li class="active"><a href="#">Transaction History <span
 					class="sr-only">(current)</span>
 			</a></li>
-			<li><a href="OrderBook.jsp">Order Book</a></li>
+			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="post" action="PastTransactions"><button style="padding:0px" class="btn btn-link" type=submit>Order Book</button></form></li>
 			<li><a href="Market.jsp">Market Statistics</a></li>
 		</ul>
 
@@ -313,7 +313,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr " + (resArr[5].equals("N") ? "class=\"danger\"" : "") + ">");
+									out.println("<tr " + (resArr[5].equals("Y") ? "class=\"danger\"" : "") + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}

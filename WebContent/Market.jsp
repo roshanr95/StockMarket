@@ -22,7 +22,7 @@
 			<li><a href="Portfolio.jsp">Portfolio</a></li>
 			<li><a href="Transact.jsp">Transact</a></li>
 			<li><a href="TransactionHistory.jsp">Transaction History</a></li>
-			<li><a href="OrderBook.jsp">Order Book</a></li>
+			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="post" action="PastTransactions"><button style="padding:0px" class="btn btn-link" type=submit>Order Book</button></form></li>
 			<li class="active"><a href="#">Market Statistics<span
 					class="sr-only">(current)</span> </a></li>
 		</ul>

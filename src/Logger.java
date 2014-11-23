@@ -70,10 +70,13 @@ public class Logger extends HttpServlet {
 		}
 		
 		else if(action.equals("logout")){
-			session.setAttribute("username",null);
+			session.removeAttribute("username");
+			session.removeAttribute("stock");
+			session.removeAttribute("bond");
+			session.removeAttribute("mf");
+			session.removeAttribute("fd");
 			response.sendRedirect("Home.jsp");
 		}
-		
 	}
 
 	/**

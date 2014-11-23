@@ -6,13 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.postgresql.util.PGInterval;
 
 //This will handle all requests from OrderBook and TransactionHistory
 
@@ -141,7 +142,7 @@ public class PastTransactions extends HttpServlet {
 			
 			while(rs.next()) {
 				String r = String.valueOf(rs.getInt(1)) + "," + String.valueOf(rs.getFloat(3)) + "," + rs.getDate(4) + "," +
-							String.valueOf(rs.getFloat(5)) + "," + rs.getObject(6) + "," + rs.getString(7);
+							String.valueOf(rs.getFloat(5)) + "," + ((PGInterval) rs.getObject(6)).getValue() + "," + rs.getString(7);
 				res = res + r + ";";
 			}
 //			System.out.println(res);
@@ -159,7 +160,89 @@ public class PastTransactions extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("username");
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("select * from curr_transact where userid = ? and invest_type='S';");
+			stmt.setString(1, user);
+			ResultSet rs = stmt.executeQuery();
+			String res="";
+			
+			while(rs.next()) {
+				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
+							rs.getTimestamp(8);
+				res = res + r + ";";
+			}
+//			System.out.println(res);
+			if(!res.equals(""))
+			session.setAttribute("stock", res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("select * from curr_transact where userid = ? and invest_type='MF';");
+			stmt.setString(1, user);
+			ResultSet rs = stmt.executeQuery();
+			String res="";
+			
+			while(rs.next()) {
+				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
+							rs.getTimestamp(8);
+				res = res + r + ";";
+			}
+//			System.out.println(res);
+			if(!res.equals(""))
+			session.setAttribute("mf", res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("select * from curr_transact where userid = ? and invest_type='B';");
+			stmt.setString(1, user);
+			ResultSet rs = stmt.executeQuery();
+			String res="";
+			
+			while(rs.next()) {
+				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
+							rs.getTimestamp(8);
+				res = res + r + ";";
+			}
+//			System.out.println(res);
+			if(!res.equals(""))
+			session.setAttribute("bond", res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement("select * from fd_table where userid = ?;");
+			stmt.setString(1, user);
+			ResultSet rs = stmt.executeQuery();
+			String res="";
+			
+			while(rs.next()) {
+				String r = String.valueOf(rs.getInt(1)) + "," + String.valueOf(rs.getFloat(3)) + "," + rs.getDate(4) + "," +
+							String.valueOf(rs.getFloat(5)) + "," + ((PGInterval) rs.getObject(6)).getValue();
+				res = res + r + ";";
+			}
+//			System.out.println(res);
+			if(!res.equals(""))
+			session.setAttribute("fd", res);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		response.sendRedirect("OrderBook.jsp?res=success");
 	}
 
 }
