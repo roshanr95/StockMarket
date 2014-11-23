@@ -22,19 +22,13 @@
 						+ session.getAttribute("username") + "</strong></p>");
 		%>
 		<ul class="nav navbar-nav">
-			<li><a href="Profile.jsp">Profile</a>
-			</li>
-			<li><a href="Portfolio.jsp">Portfolio</a>
-			</li>
-			<li><a href="Transact.jsp">Transact</a>
-			</li>
-			<li><a href="TransactionHistory.jsp">Transaction History</a>
-			</li>
-			<li><a href="OrderBook.jsp">Order Book</a>
-			</li>
+			<li><a href="Profile.jsp">Profile</a></li>
+			<li><a href="Portfolio.jsp">Portfolio</a></li>
+			<li><a href="Transact.jsp">Transact</a></li>
+			<li><a href="TransactionHistory.jsp">Transaction History</a></li>
+			<li><a href="OrderBook.jsp">Order Book</a></li>
 			<li class="active"><a href="#">Market Statistics<span
-					class="sr-only">(current)</span> </a>
-			</li>
+					class="sr-only">(current)</span> </a></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
@@ -57,7 +51,8 @@
 		method="post">
 		<select class="form-control" name="company">
 			<%
-				out.print(session.getAttribute("companies"));
+				out.print(session.getAttribute("companiesstock"));
+				out.print(session.getAttribute("companiesmf"));
 			%>
 		</select>
 		<button type="submit" class="btn btn-default">Check
@@ -74,7 +69,7 @@
 		}
 	%>
 
-	<table class="table table-condensed table-hover">
+	<table class="table table-hover">
 		<tr>
 			<th>Date</th>
 			<th>Price</th>
@@ -84,13 +79,12 @@
 			if (session.getAttribute("company_stat_name") != null) {
 				String res = (String) session.getAttribute("stock_prices");
 				String[] toparr = res.split(";");
-				String[] date = new String[5];
-				String[] style = "default,success,info,warning,danger"
-						.split(",");
-				Double[] price = new Double[5];
+				String[] date = new String[toparr.length];
+				String[] style = "default,success,info,warning,danger".split(",");
+				Double[] price = new Double[toparr.length];
 				double maxi = 0;
 				Double mini = null;
-				for (int j = 0; j < 5; j++) {
+				for (int j = 0; j < toparr.length; j++) {
 					String[] resArr = toparr[j].split(",");
 					date[j] = resArr[0];
 					price[j] = Double.parseDouble(resArr[1]);
@@ -99,9 +93,8 @@
 					else mini=Math.min(mini,price[j]);
 				}
 				double range=maxi-mini;
-				for (int i = 0; i < 5; i++) {
-					String html="<tr><td>"+date[i]+"</td><td>"+price[i]+"</td><td><div class=\"progress\"><div class=\"progress-bar progress-bar-"+style[i]+" progress-bar-striped\" role=\"progressbar\" aria-valuenow=\""+(10+80*(price[i]-mini)/range)+"\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+(10+80*(price[i]-mini)/range)+"%\"></div></td></tr>";
-					System.out.println(html);
+				for (int i = 0; i < toparr.length; i++) {
+					String html="<tr><td>"+date[i]+"</td><td>"+price[i]+"</td><td><div class=\"progress\"><div class=\"progress-bar progress-bar-"+style[i%5]+" progress-bar-striped\" role=\"progressbar\" aria-valuenow=\""+(10+80*(price[i]-mini)/range)+"\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+(10+80*(price[i]-mini)/range)+"%\"></div></td></tr>";
 					out.print(html);
 				}
 			}
