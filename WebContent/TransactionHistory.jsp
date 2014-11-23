@@ -96,9 +96,7 @@
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
@@ -160,9 +158,7 @@
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
@@ -224,9 +220,7 @@
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
@@ -288,9 +282,7 @@
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
-							%>
-					</span>
-					</a>
+							%> </span> </a>
 				</h4>
 			</div>
 			<div id="FD" class="panel-collapse collapse" role="tabpanel"

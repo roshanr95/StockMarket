@@ -1,11 +1,14 @@
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //This will handle new transact operations
 
@@ -40,7 +43,25 @@ public class MarketStats extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String ticker = request.getParameter("company");
+		HttpSession session = request.getSession(false);
+		
+		try {
+			PreparedStatement p = conn.prepareStatement("select name from company where ticker_symbol = ?");
+			p.setString(1,ticker);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) session.setAttribute("company_stat_name",rs.getString(1)+"   <small>"+ticker+"</small>");
+			p = conn.prepareStatement("select * from stock_history where ticker_symbol = ?");
+			p.setString(1,ticker);
+			rs = p.executeQuery();
+			String str = "";
+			while(rs.next()) str+=rs.getString(2)+","+rs.getString(3)+";";
+			session.setAttribute("stock_prices", str);
+			response.sendRedirect("Market.jsp");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -57,6 +57,13 @@ public class Logger extends HttpServlet {
 				ResultSet rs = p.executeQuery();
 				if(rs.next()) {
 					if(rs.getString(1).equals(password)) {
+						
+						String str="";
+						p=conn.prepareStatement("select ticker_symbol,name from company");
+						ResultSet rs2 = p.executeQuery();
+						while(rs2.next()) str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+						session.setAttribute("companies",str);
+						
 						session.setAttribute("username", username);
 						response.sendRedirect("Profile.jsp");
 					}
@@ -79,6 +86,9 @@ public class Logger extends HttpServlet {
 			session.removeAttribute("bond2");
 			session.removeAttribute("mf2");
 			session.removeAttribute("fd2");
+			session.setAttribute("stock_prices",null);
+			session.setAttribute("company_stat_name",null);
+			session.setAttribute("companies", null);
 			response.sendRedirect("Home.jsp");
 		}
 	}

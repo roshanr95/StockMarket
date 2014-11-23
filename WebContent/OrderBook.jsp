@@ -31,7 +31,10 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
-			<form method="get" action="Logger"><input type="hidden" name="action" value="logout"/><button type="submit" class="btn btn-default navbar-btn">Logout</button></form>
+			<form method="get" action="Logger">
+				<input type="hidden" name="action" value="logout" />
+				<button type="submit" class="btn btn-default navbar-btn">Logout</button>
+			</form>
 		</ul>
 	</div>
 	</nav>

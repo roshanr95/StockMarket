@@ -139,7 +139,7 @@
 			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert alert-warning\" role=\"alert\">Passwords do not match</div>");
 	%>
 
-	
+
 	<div
 		<%if (session.getAttribute("username") != null
 					&& session.getAttribute("username").equals("admin")) {
