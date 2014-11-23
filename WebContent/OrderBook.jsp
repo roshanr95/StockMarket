@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +9,8 @@
 <link rel="stylesheet" href="bootstrap.css">
 </head>
 <body style="margin-left: 5%; margin-right: 5%">
+	
+
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="navbar-header">
 		<p class="navbar-text">
@@ -43,84 +46,231 @@
 
 	<legend>Order Book</legend>
 
-	<%
-		Integer[] resultint = new Integer[4];
-		String[] result = new String[4];
-		for(int i=0;i<4;i++) {
-			result[i]="";
-			resultint[i]=0;
-		}
-		if(session.getAttribute("username")!=null) {
-			//Find a way here	
-		}	
-	%>
-
 	<div class="panel-group" id="accordion" role="tablist"
 		aria-multiselectable="true">
+		<%
+			if (session.getAttribute("stock2") == null) {
+				out.println("<!--");
+			}
+		%>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headStocks">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
-						aria-expanded="true" aria-controls="Stocks"> Stocks </a> <span
-						class="badge" style="float: right"> <%out.print(resultint[0]);%>
+						aria-expanded="true" aria-controls="Stocks"> Stocks <span
+						class="badge badge-inverse" style="float:right"> <%
+								if (session.getAttribute("stock2") != null) {
+									String res = (String) session.getAttribute("stock2");
+									String[] toparr = res.split(";");
+									out.println(toparr.length);
+								}
+							%>
 					</span>
+					</a>
 				</h4>
 			</div>
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
 				aria-labelledby="headStocks">
 				<div class="panel-body">
-					<%out.print(result[0]);%>
+					<table class="table" style="margin-top: 1%">
+						<tr>
+							<th>ID</th>
+							<th>Ticker</th>
+							<th>Kind</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Time Stamp</th>
+						</tr>
+						<%
+							if (session.getAttribute("stock2") != null) {
+								String res = (String) session.getAttribute("stock2");
+								String[] toparr = res.split(";");
+								for (int j = 0; j < toparr.length; j++) {
+									String[] resArr = toparr[j].split(",");
+									out.println("<tr>");
+									for (int i = 0; i < resArr.length; i++) {
+										out.println("<td>" + resArr[i] + "</td>");
+									}
+									out.println("</tr>");
+								}
+							}
+						%>
+					</table>
 				</div>
 			</div>
 		</div>
+		<%
+			if (session.getAttribute("stock2") == null) {
+				out.println("-->");
+			}
+		%>
+		<%
+			if (session.getAttribute("bond2") == null) {
+				out.println("<!--");
+			}
+		%>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headBonds">
 				<h4 class="panel-title">
-					<a class="collapsed" data-toggle="collapse"
-						data-parent="#accordion" href="#Bonds" aria-expanded="false"
-						aria-controls="Bonds"> Bonds </a> <span class="badge"
-						style="float: right"> <%out.print(resultint[1]);%> </span>
+					<a data-toggle="collapse" data-parent="#accordion" href="#Bonds"
+						aria-expanded="false" aria-controls="Bonds"> Bonds <span
+						class="badge badge-inverse" style="float:right"> <%
+								if (session.getAttribute("bond2") != null) {
+									String res = (String) session.getAttribute("bond2");
+									String[] toparr = res.split(";");
+									out.println(toparr.length);
+								}
+							%>
+					</span>
+					</a>
 				</h4>
 			</div>
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headBonds">
 				<div class="panel-body">
-					<%out.print(result[1]);%>
+					<table class="table" style="margin-top: 1%">
+						<tr>
+							<th>ID</th>
+							<th>Ticker</th>
+							<th>Kind</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Time Stamp</th>
+						</tr>
+						<%
+							if (session.getAttribute("bond2") != null) {
+								String res = (String) session.getAttribute("bond2");
+								String[] toparr = res.split(";");
+								for (int j = 0; j < toparr.length; j++) {
+									String[] resArr = toparr[j].split(",");
+									out.println("<tr>");
+									for (int i = 0; i < resArr.length; i++) {
+										out.println("<td>" + resArr[i] + "</td>");
+									}
+									out.println("</tr>");
+								}
+							}
+						%>
+					</table>
 				</div>
 			</div>
 		</div>
+		<%
+			if (session.getAttribute("bond2") == null) {
+				out.println("-->");
+			}
+		%>
+		<%
+			if (session.getAttribute("mf2") == null) {
+				out.println("<!--");
+			}
+		%>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headMFunds">
 				<h4 class="panel-title">
-					<a class="collapsed" data-toggle="collapse"
-						data-parent="#accordion" href="#MFunds" aria-expanded="false"
-						aria-controls="MFunds"> Mutual Funds </a> <span class="badge"
-						style="float: right"> <%out.print(resultint[2]);%> </span>
+					<a data-toggle="collapse" data-parent="#accordion" href="#MFunds"
+						aria-expanded="false" aria-controls="MFunds"> Mutual Funds <span
+						class="badge badge-inverse" style="float:right"> <%
+								if (session.getAttribute("mf2") != null) {
+									String res = (String) session.getAttribute("mf2");
+									String[] toparr = res.split(";");
+									out.println(toparr.length);
+								}
+							%>
+					</span>
+					</a>
 				</h4>
 			</div>
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headMFunds">
 				<div class="panel-body">
-					<%out.print(result[2]);%>
+					<table class="table" style="margin-top: 1%">
+						<tr>
+							<th>ID</th>
+							<th>Ticker</th>
+							<th>Kind</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Time Stamp</th>
+						</tr>
+						<%
+							if (session.getAttribute("mf2") != null) {
+								String res = (String) session.getAttribute("mf2");
+								String[] toparr = res.split(";");
+								for (int j = 0; j < toparr.length; j++) {
+									String[] resArr = toparr[j].split(",");
+									out.println("<tr>");
+									for (int i = 0; i < resArr.length; i++) {
+										out.println("<td>" + resArr[i] + "</td>");
+									}
+									out.println("</tr>");
+								}
+							}
+						%>
+					</table>
 				</div>
 			</div>
 		</div>
+		<%
+			if (session.getAttribute("mf2") == null) {
+				out.println("-->");
+			}
+		%>
+		<%
+			if (session.getAttribute("fd2") == null) {
+				out.println("<!--");
+			}
+		%>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headFD">
 				<h4 class="panel-title">
-					<a class="collapsed" data-toggle="collapse"
-						data-parent="#accordion" href="#FDs" aria-expanded="false"
-						aria-controls="FDs"> Fixed Deposits </a> <span class="badge"
-						style="float: right"> <%out.print(resultint[3]);%> </span>
+					<a data-toggle="collapse" data-parent="#accordion" href="#FD"
+						aria-expanded="false" aria-controls="FD"> Fixed Deposits <span
+						class="badge badge-inverse" style="float:right"> <%
+								if (session.getAttribute("fd2") != null) {
+									String res = (String) session.getAttribute("fd2");
+									String[] toparr = res.split(";");
+									out.println(toparr.length);
+								}
+							%>
+					</span>
+					</a>
 				</h4>
 			</div>
-			<div id="FDs" class="panel-collapse collapse" role="tabpanel"
+			<div id="FD" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headFD">
 				<div class="panel-body">
-					<%out.print(result[3]);%>
+					<table class="table" style="margin-top: 1%">
+						<tr>
+							<th>ID</th>
+							<th>Amount</th>
+							<th>Day of Issue</th>
+							<th>Interest Rate</th>
+							<th>Duration</th>
+						</tr>
+						<%
+							if (session.getAttribute("fd2") != null) {
+								String res = (String) session.getAttribute("fd2");
+								String[] toparr = res.split(";");
+								for (int j = 0; j < toparr.length; j++) {
+									String[] resArr = toparr[j].split(",");
+									out.println("<tr>");
+									for (int i = 0; i < resArr.length; i++) {
+										out.println("<td>" + resArr[i] + "</td>");
+									}
+									out.println("</tr>");
+								}
+							}
+						%>
+					</table>
 				</div>
 			</div>
 		</div>
+		<%
+			if (session.getAttribute("fd2") == null) {
+				out.println("-->");
+			}
+		%>
 	</div>
 
 	<script src="jquery.js"></script>

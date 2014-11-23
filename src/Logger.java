@@ -85,17 +85,20 @@ public class Logger extends HttpServlet {
 		}
 		
 		else if(action.equals("logout")){
-			session.setAttribute("username",null);
-			session.setAttribute("stock",null);
-			session.setAttribute("mf",null);
-			session.setAttribute("bond",null);
-			session.setAttribute("fd",null);
+			session.removeAttribute("username");
+			session.removeAttribute("stock");
+			session.removeAttribute("bond");
+			session.removeAttribute("mf");
+			session.removeAttribute("fd");
+			session.removeAttribute("stock2");
+			session.removeAttribute("bond2");
+			session.removeAttribute("mf2");
+			session.removeAttribute("fd2");
 			session.setAttribute("stock_prices",null);
 			session.setAttribute("company_stat_name",null);
 			session.setAttribute("companies", null);
 			response.sendRedirect("Home.jsp");
 		}
-		
 	}
 
 	/**
