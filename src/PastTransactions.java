@@ -79,9 +79,8 @@ public class PastTransactions extends HttpServlet {
 							rs.getTimestamp(8) + "," + rs.getString(9);
 				res = res + r + ";";
 			}
-//			System.out.println(res);
-			if(!res.equals(""))
-			session.setAttribute("stock", res);
+			System.out.println(res);
+			if(!res.equals("")) session.setAttribute("stock", res);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,8 +101,7 @@ public class PastTransactions extends HttpServlet {
 				res = res + r + ";";
 			}
 //			System.out.println(res);
-			if(!res.equals(""))
-			session.setAttribute("mf", res);
+			if(!res.equals("")) session.setAttribute("mf", res);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,8 +122,7 @@ public class PastTransactions extends HttpServlet {
 				res = res + r + ";";
 			}
 //			System.out.println(res);
-			if(!res.equals(""))
-			session.setAttribute("bond", res);
+			if(!res.equals("")) session.setAttribute("bond", res);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,8 +142,7 @@ public class PastTransactions extends HttpServlet {
 				res = res + r + ";";
 			}
 //			System.out.println(res);
-			if(!res.equals(""))
-			session.setAttribute("fd", res);
+			if(!res.equals("")) session.setAttribute("fd", res);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
