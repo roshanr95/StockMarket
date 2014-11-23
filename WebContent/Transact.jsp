@@ -57,7 +57,7 @@
 	<form class="form-inline" role="form" action="NewTransaction" method ="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="stock_company">
-			<option>ABC</option>
+			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("companiesstock")); %>
 		</select> <select class="form-control" name="stock_type">
 			<option>buy</option>
 			<option>sell</option>
@@ -72,7 +72,7 @@
 	<form class="form-inline" role="form" action="NewTransaction" method ="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="mf_company">
-			<option>DEF</option>
+			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("companiesmf")); %>
 		</select> <select class="form-control" name="mf_type">
 			<option>buy</option>
 			<option>sell</option>
@@ -90,7 +90,6 @@
 			<option>buy</option>
 			<option>sell</option>
 		</select> <select class="form-control" name="bonds_company">
-			<option>XYZ</option>
 		</select> <br>Choose the quantity you wish to invest<br> <input
 			type="text" name="bonds_quantity">
 		<button type="submit" class="btn btn-default">Submit</button>
