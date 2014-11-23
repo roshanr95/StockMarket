@@ -75,6 +75,10 @@ public class Logger extends HttpServlet {
 			session.removeAttribute("bond");
 			session.removeAttribute("mf");
 			session.removeAttribute("fd");
+			session.removeAttribute("stock2");
+			session.removeAttribute("bond2");
+			session.removeAttribute("mf2");
+			session.removeAttribute("fd2");
 			response.sendRedirect("Home.jsp");
 		}
 	}

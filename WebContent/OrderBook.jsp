@@ -46,7 +46,7 @@
 	<div class="panel-group" id="accordion" role="tablist"
 		aria-multiselectable="true">
 		<%
-			if (session.getAttribute("stock") == null) {
+			if (session.getAttribute("stock2") == null) {
 				out.println("<!--");
 			}
 		%>
@@ -56,8 +56,8 @@
 					<a data-toggle="collapse" data-parent="#accordion" href="#Stocks"
 						aria-expanded="true" aria-controls="Stocks"> Stocks <span
 						class="badge badge-inverse" style="float:right"> <%
-								if (session.getAttribute("stock") != null) {
-									String res = (String) session.getAttribute("stock");
+								if (session.getAttribute("stock2") != null) {
+									String res = (String) session.getAttribute("stock2");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
@@ -79,8 +79,8 @@
 							<th>Time Stamp</th>
 						</tr>
 						<%
-							if (session.getAttribute("stock") != null) {
-								String res = (String) session.getAttribute("stock");
+							if (session.getAttribute("stock2") != null) {
+								String res = (String) session.getAttribute("stock2");
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
@@ -97,14 +97,12 @@
 			</div>
 		</div>
 		<%
-			if (session.getAttribute("stock") == null) {
+			if (session.getAttribute("stock2") == null) {
 				out.println("-->");
-			} else {
-				session.removeAttribute("stock");
 			}
 		%>
 		<%
-			if (session.getAttribute("bond") == null) {
+			if (session.getAttribute("bond2") == null) {
 				out.println("<!--");
 			}
 		%>
@@ -114,8 +112,8 @@
 					<a data-toggle="collapse" data-parent="#accordion" href="#Bonds"
 						aria-expanded="false" aria-controls="Bonds"> Bonds <span
 						class="badge badge-inverse" style="float:right"> <%
-								if (session.getAttribute("bond") != null) {
-									String res = (String) session.getAttribute("bond");
+								if (session.getAttribute("bond2") != null) {
+									String res = (String) session.getAttribute("bond2");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
@@ -137,8 +135,8 @@
 							<th>Time Stamp</th>
 						</tr>
 						<%
-							if (session.getAttribute("bond") != null) {
-								String res = (String) session.getAttribute("bond");
+							if (session.getAttribute("bond2") != null) {
+								String res = (String) session.getAttribute("bond2");
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
@@ -155,14 +153,12 @@
 			</div>
 		</div>
 		<%
-			if (session.getAttribute("bond") == null) {
+			if (session.getAttribute("bond2") == null) {
 				out.println("-->");
-			} else {
-				session.removeAttribute("bond");
 			}
 		%>
 		<%
-			if (session.getAttribute("mf") == null) {
+			if (session.getAttribute("mf2") == null) {
 				out.println("<!--");
 			}
 		%>
@@ -172,8 +168,8 @@
 					<a data-toggle="collapse" data-parent="#accordion" href="#MFunds"
 						aria-expanded="false" aria-controls="MFunds"> Mutual Funds <span
 						class="badge badge-inverse" style="float:right"> <%
-								if (session.getAttribute("mf") != null) {
-									String res = (String) session.getAttribute("mf");
+								if (session.getAttribute("mf2") != null) {
+									String res = (String) session.getAttribute("mf2");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
@@ -195,8 +191,8 @@
 							<th>Time Stamp</th>
 						</tr>
 						<%
-							if (session.getAttribute("mf") != null) {
-								String res = (String) session.getAttribute("mf");
+							if (session.getAttribute("mf2") != null) {
+								String res = (String) session.getAttribute("mf2");
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
@@ -213,14 +209,12 @@
 			</div>
 		</div>
 		<%
-			if (session.getAttribute("mf") == null) {
+			if (session.getAttribute("mf2") == null) {
 				out.println("-->");
-			} else {
-				session.removeAttribute("mf");
 			}
 		%>
 		<%
-			if (session.getAttribute("fd") == null) {
+			if (session.getAttribute("fd2") == null) {
 				out.println("<!--");
 			}
 		%>
@@ -230,8 +224,8 @@
 					<a data-toggle="collapse" data-parent="#accordion" href="#FD"
 						aria-expanded="false" aria-controls="FD"> Fixed Deposits <span
 						class="badge badge-inverse" style="float:right"> <%
-								if (session.getAttribute("fd") != null) {
-									String res = (String) session.getAttribute("fd");
+								if (session.getAttribute("fd2") != null) {
+									String res = (String) session.getAttribute("fd2");
 									String[] toparr = res.split(";");
 									out.println(toparr.length);
 								}
@@ -252,8 +246,8 @@
 							<th>Duration</th>
 						</tr>
 						<%
-							if (session.getAttribute("fd") != null) {
-								String res = (String) session.getAttribute("fd");
+							if (session.getAttribute("fd2") != null) {
+								String res = (String) session.getAttribute("fd2");
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
@@ -270,10 +264,8 @@
 			</div>
 		</div>
 		<%
-			if (session.getAttribute("fd") == null) {
+			if (session.getAttribute("fd2") == null) {
 				out.println("-->");
-			} else {
-				session.removeAttribute("fd");
 			}
 		%>
 	</div>
