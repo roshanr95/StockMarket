@@ -59,20 +59,21 @@ public class Logger extends HttpServlet {
 					if(rs.getString(1).equals(password)) {
 						
 						String str="<optgroup label=\"Stocks\">";
+						String str2="<optgroup label=\"Mutual Funds\">";
 						p=conn.prepareStatement("select ticker_symbol,name from company");
 						ResultSet rs2 = p.executeQuery();
-						while(rs2.next() && rs2.getString(1).substring(0,3).equals("BOM")) {
-							str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
-						}
+						while(rs2.next()) {
+							if(rs2.getString(1).substring(0,3).equals("BOM")) str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+							else str2+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+						}	
 						str+="</optgroup>";
 						session.setAttribute("companiesstock",str);
-						str="<optgroup label=\"Mutual Funds\"><option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
-						while(rs2.next()) {
-							str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
-						}
-						str+="</optgroup>";
-						session.setAttribute("companiesmf",str);					
+						str2+="</optgroup>";
+						session.setAttribute("companiesmf",str2);					
 						session.setAttribute("username", username);
+						
+						Utils.gameParams(conn, session);
+						
 						response.sendRedirect("Profile.jsp");
 					}
 					else response.sendRedirect("Home.jsp?res=error2");

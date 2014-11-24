@@ -82,6 +82,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -141,6 +142,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -199,6 +201,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>

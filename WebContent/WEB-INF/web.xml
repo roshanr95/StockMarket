@@ -69,4 +69,14 @@
     <servlet-name>CancelOrder</servlet-name>
     <url-pattern>/CancelOrder</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GameParam</display-name>
+    <servlet-name>GameParam</servlet-name>
+    <servlet-class>GameParam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GameParam</servlet-name>
+    <url-pattern>/GameParam</url-pattern>
+  </servlet-mapping>
 </web-app>

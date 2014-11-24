@@ -149,19 +149,18 @@ public class CancelOrder extends HttpServlet {
 				p.setString(2, user);
 				p.executeUpdate();
 			} else {
-				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?; " +
+				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ? and ticker_symbol = ?; " +
 						"insert into ownership (userid, ticker_symbol, invest_type, quantity) " +
-						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=? and invest_type=? and quantity=?)");
+						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=?)");
 				p.setInt(1, quantity);
 				p.setString(2, user);
-				p.setString(3, user);
-				p.setString(7, user);
-				p.setString(4, rs.getString(3));
-				p.setString(8, rs.getString(3));
-				p.setString(5, rs.getString(4));
-				p.setString(9, rs.getString(4));
-				p.setInt(6, quantity);
-				p.setInt(10, quantity);
+				p.setString(3, rs.getString(3));
+				p.setString(4, user);
+				p.setString(8, user);
+				p.setString(5, rs.getString(3));
+				p.setString(9, rs.getString(3));
+				p.setString(6, rs.getString(4));
+				p.setInt(7, quantity);
 				
 				p.executeUpdate();
 				
