@@ -75,25 +75,35 @@ public class CancelOrder extends HttpServlet {
 				amount = amount + amount * months * rate / 1200;
 				suc = "Y";
 			}
-			// remove from fd_table
-			p = conn.prepareStatement("delete from fd_table where fd_id= ?");
-			p.setInt(1, fd_id);
-			p.executeUpdate();
-			// Add to fd_history
-			p = conn.prepareStatement("insert into fd_history values(?,?,?,?,?,?,?)");
-			p.setInt(1, fd_id);
-			p.setString(2, username);
-			p.setDouble(3, ini_amount);
-			p.setDate(4, d);
-			p.setDouble(5, rate);
-			p.setObject(6, dur);
-			p.setString(7, suc);
-			p.executeUpdate();
-			// give money to users
-			p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
-			p.setDouble(1, amount);
-			p.setString(2, username);
-			p.executeUpdate();
+			
+			try {
+				conn.setAutoCommit(false);
+				// remove from fd_table
+				p = conn.prepareStatement("delete from fd_table where fd_id= ?");
+				p.setInt(1, fd_id);
+				p.executeUpdate();
+				// Add to fd_history
+				p = conn.prepareStatement("insert into fd_history values(?,?,?,?,?,?,?)");
+				p.setInt(1, fd_id);
+				p.setString(2, username);
+				p.setDouble(3, ini_amount);
+				p.setDate(4, d);
+				p.setDouble(5, rate);
+				p.setObject(6, dur);
+				p.setString(7, suc);
+				p.executeUpdate();
+				// give money to users
+				p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
+				p.setDouble(1, amount);
+				p.setString(2, username);
+				p.executeUpdate();
+				conn.commit();
+			} catch (SQLException e) {
+				conn.rollback();
+			} finally {
+				conn.setAutoCommit(true);
+			}
+			
 			Utils.setOrderBook(conn, session);
 			response.sendRedirect("OrderBook.jsp?res=break");
 			
