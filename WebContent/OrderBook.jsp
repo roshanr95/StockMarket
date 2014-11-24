@@ -44,6 +44,13 @@
 	<!--Rest of the content down here-->
 
 	<legend>Order Book</legend>
+	
+	<%
+		if (request.getParameter("res") == null) ;
+		else if (request.getParameter("res").equals("cancel")) out.println("<div class=\"alert alert-success\" role=\"alert\"><strong>Order Cancelled</strong></div>");
+		else if (request.getParameter("res").equals("break")) out.println("<div class=\"alert alert-success\" role=\"alert\"><strong>Fixed Deposit Broken</strong></div>");
+		else if (request.getParameter("res").equals("error")) out.println("<div class=\"alert alert-danger\" role=\"alert\"><strong>Error Occurred</strong></div>");
+	%>
 
 	<div class="panel-group" id="accordion" role="tablist"
 		aria-multiselectable="true">
@@ -79,6 +86,7 @@
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Time Stamp</th>
+							<th></th>
 						</tr>
 						<%
 							if (session.getAttribute("stock2") != null) {
@@ -90,6 +98,8 @@
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
+									out.println("<td style=\"width\"><form method=\"post\" action=\"CancelOrder\"><input type=\"hidden\" name=\"no\" value=\"" + resArr[0] + 
+											"\"></input><button type=\"submit\" class=\"btn btn-danger\">Cancel</button></form></td>");
 									out.println("</tr>");
 								}
 							}
@@ -146,6 +156,8 @@
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
+									out.println("<td style=\"width\"><form method=\"post\" action=\"CancelOrder\"><input type=\"hidden\" name=\"no\" value=\"" + resArr[0] + 
+											"\"></input><button type=\"submit\" class=\"btn btn-danger\">Cancel</button></form></td>");
 									out.println("</tr>");
 								}
 							}
@@ -191,6 +203,7 @@
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Time Stamp</th>
+							<th></th>
 						</tr>
 						<%
 							if (session.getAttribute("mf2") != null) {
@@ -202,6 +215,8 @@
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
+									out.println("<td style=\"width\"><form method=\"post\" action=\"CancelOrder\"><input type=\"hidden\" name=\"no\" value=\"" + resArr[0] + 
+											"\"></input><button type=\"submit\" class=\"btn btn-danger\">Cancel</button></form></td>");
 									out.println("</tr>");
 								}
 							}
@@ -246,6 +261,7 @@
 							<th>Day of Issue</th>
 							<th>Interest Rate</th>
 							<th>Duration</th>
+							<th></th>
 						</tr>
 						<%
 							if (session.getAttribute("fd2") != null) {
@@ -257,6 +273,8 @@
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
+									out.println("<td style=\"width\"><form method=\"get\" action=\"CancelOrder\"><input type=\"hidden\" name=\"no\" value=\"" + resArr[0] + 
+											"\"></input><button type=\"submit\" class=\"btn btn-danger\">Break</button></form></td>");
 									out.println("</tr>");
 								}
 							}

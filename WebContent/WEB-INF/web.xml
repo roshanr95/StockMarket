@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>StockMarket</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -58,5 +58,15 @@
   <servlet-mapping>
     <servlet-name>PastTransactions</servlet-name>
     <url-pattern>/PastTransactions</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CancelOrder</display-name>
+    <servlet-name>CancelOrder</servlet-name>
+    <servlet-class>CancelOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelOrder</servlet-name>
+    <url-pattern>/CancelOrder</url-pattern>
   </servlet-mapping>
 </web-app>
