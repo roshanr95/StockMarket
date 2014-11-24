@@ -143,7 +143,7 @@ public class NewTransaction extends HttpServlet {
 						p.setString(2,username);
 						p.setString(3, stock_company);
 						p.setString(4, val);
-						p.setDouble(5,user_cost);
+						p.setDouble(5,user_price);
 						p.setInt(6,quantity);
 						java.util.Date date= new java.util.Date();
 						Timestamp temp= new Timestamp(date.getTime());
@@ -248,11 +248,11 @@ public class NewTransaction extends HttpServlet {
 							p.setString(2,username);
 							p.setString(3, stock_company);
 							p.setString(4, val);
-							p.setDouble(6,user_cost);
-							p.setInt(7,quantity);
+							p.setDouble(5,user_price);
+							p.setInt(6,quantity);
 							java.util.Date date= new java.util.Date();
 							Timestamp temp= new Timestamp(date.getTime());
-							p.setTimestamp(8, temp);
+							p.setTimestamp(7, temp);
 							p.executeUpdate();
 							
 							response.sendRedirect("Transact.jsp?res=trans_sell");
@@ -309,7 +309,6 @@ public class NewTransaction extends HttpServlet {
 			}
 			else if(classify.equals("fd"))
 			{
-
 				if(fd_type.equals("Buy_FD"))
 				{
 					double interest=0.0;
@@ -358,67 +357,6 @@ public class NewTransaction extends HttpServlet {
 
 						p.setString(1, String.valueOf(fd_no));
 						p.executeUpdate();
-					}
-				}
-				else
-				{
-					int fd_id=0;
-					if(fd_string.equals(""))
-					{
-						response.sendRedirect("Transact.jsp");
-						return;
-					}
-					fd_id=Integer.parseInt(fd_string);
-					p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? and userid = ?");
-					p.setInt(1,fd_id);
-					p.setString(2, username);
-					rs=p.executeQuery();
-					if(rs.next())
-					{
-						Double amount=rs.getDouble(3);
-						Double ini_amount=amount;
-						Double rate=rs.getDouble(5);
-						java.sql.Date d = rs.getDate(4);
-						PGInterval dur=(PGInterval) rs.getObject(6);
-						p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? AND day_of_issue + fd_duration > ?");
-						p.setInt(1, fd_id);
-						Date utilDate = new Date();
-						java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-						p.setDate(2,sqlDate);
-						rs=p.executeQuery();
-						String suc="N";
-						if(rs.next())
-						{
-							int months = dur.getMonths()*12 + dur.getYears(); 
-							amount=amount+amount*months*rate/1200;
-							suc="Y";
-						}
-						//remove from fd_table
-						p = conn.prepareStatement("delete from fd_table where fd_id= ?");
-						p.setInt(1,fd_id);
-						p.executeUpdate();
-						//Add to fd_history
-						p = conn.prepareStatement("insert into fd_history values(?,?,?,?,?,?,?)");
-						p.setInt(1,fd_id);
-						p.setString(2,username);
-						p.setDouble(3,ini_amount);
-						p.setDate(4,d);
-						p.setDouble(5, rate);
-						p.setObject(6,dur);
-						p.setString(7, suc);
-						p.executeUpdate();
-						//give money to users
-						p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
-						p.setDouble(1, amount);
-						p.setString(2, username);
-						p.executeUpdate();
-						response.sendRedirect("Transact.jsp?res=fd_broken");
-					}
-					else
-					{
-						//Incorrect fd_id
-						response.sendRedirect("Transact.jsp?res=invalid_id");
 					}
 				}
 			}

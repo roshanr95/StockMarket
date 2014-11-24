@@ -145,14 +145,10 @@
 
 
 	<br>
-	<b>Fixed deposit</b>
+	<b>Purchase Fixed deposit</b>
 	<form class="form-inline" role="form" action="NewTransaction"
 		method="post">
-		<select class="form-control" name="fd_type">
-			<option>Buy_FD</option>
-			<option>Break_FD</option>
-		</select> <br>Enter your FD ID if you wish to break it<br> <input
-			type="text" name="break_fd"> <br>Choose the investment
+ <br>Choose the investment
 		period<br> <select class="form-control" name="fd_period">
 			<option>1 year</option>
 			<option>6 mons</option>

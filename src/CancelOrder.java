@@ -149,10 +149,27 @@ public class CancelOrder extends HttpServlet {
 				p.setString(2, user);
 				p.executeUpdate();
 			} else {
-				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?");
+				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?; " +
+						"insert into ownership (userid, ticker_symbol, invest_type, quantity) " +
+						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=? and invest_type=? and quantity=?)");
 				p.setInt(1, quantity);
 				p.setString(2, user);
+				p.setString(3, user);
+				p.setString(7, user);
+				p.setString(4, rs.getString(3));
+				p.setString(8, rs.getString(3));
+				p.setString(5, rs.getString(4));
+				p.setString(9, rs.getString(4));
+				p.setInt(6, quantity);
+				p.setInt(10, quantity);
+				
 				p.executeUpdate();
+				
+//				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?");
+//				p.setInt(1, quantity);
+//				p.setString(2, user);
+//				p.executeUpdate();
+				
 			}
 			Utils.setOrderBook(conn, session);
 			response.sendRedirect("OrderBook.jsp?res=cancel");

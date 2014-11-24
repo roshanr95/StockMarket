@@ -130,8 +130,5 @@
  insert into users values('sanket','sanket','100000','sanket1729@gmail.com','sanket');
  insert into users values('karan','karan','100000','sanket1729@gmail.com','karan');
  insert into users values('rosh','rosh','100000','sanket1729@gmail.com','rosh');
- insert into company values('ABC','ABC inc.','120.2');
- insert into company values('XYZ','XYZ inc.','220.2');
- insert into company values('DEF','DEF inc.','20.2');
  insert into game_params values('fd_no','10000');
  insert into game_params values('trans_no','100000');
