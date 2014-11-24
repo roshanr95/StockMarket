@@ -57,107 +57,120 @@
 		else if (request.getParameter("res").equals("stocks"))
 			out.println("<div class=\"alert alert-warning\" role=\"alert\">You don't posses the required amount of shares!</div>");
 		else if (request.getParameter("res").equals("invalid_id"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You have entered Invalid fd_id</div>");
+			out.println("<div class=\"alert alert-warning\" role=\"alert\">You have entered an invalid FD ID.</div>");
 		else if (request.getParameter("res").equals("stock_buy"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You stock has been purchased. Check Transaction History for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">The stock has been purchased. Check Transaction History for details</div>");
 		else if (request.getParameter("res").equals("stock_sell"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You stock has been sold. Check Transaction History for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">The stock has been sold. Check Transaction History for details</div>");
 		else if (request.getParameter("res").equals("fd_buy"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You FD has been purchased. Check OrderBook for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">Your FD has been created. Check OrderBook for details</div>");
 		else if (request.getParameter("res").equals("fd_broken"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You FD has been broken. Check OrderBook for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">Your FD has been broken. Check OrderBook for details</div>");
 		else if (request.getParameter("res").equals("trans_buy"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You  buy Transaction is posted. Check OrderBook for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">Your buy order has been processed. Check OrderBook for details</div>");
 		else if (request.getParameter("res").equals("trans_sell"))
-			out.println("<div class=\"alert alert-warning\" role=\"alert\">You sell Transaction is posted. Check OrderBook for details</div>");
+			out.println("<div class=\"alert alert-success\" role=\"alert\">Your sell order has been processed. Check OrderBook for details</div>");
 	%>
-	<br>
-	<b>Stock investments</b>
-	<form class="form-inline" role="form" action="NewTransaction"
-		method="post">
-		<br>Choose the company where you wish to invest<br> <select
-			class="form-control" name="stock_company">
-			<%
-				if (session.getAttribute("username") != null)
-					out.print(session.getAttribute("companiesstock"));
-			%>
-		</select> <select class="form-control" name="stock_type">
-			<option>buy</option>
-			<option>sell</option>
-			<option>buy_offer</option>
-			<option>sell_offer</option>
-		</select> <br>Choose the quantity you wish to buy/sell<br> <input
-			type="text" name="stock_quantity"> <br>Choose the price
-		at which you wish to buy/sell<br> <input type="text"
-			name="stock_price">
-		<button type="submit" class="btn btn-default">Submit</button>
-		<input type="hidden" name="classify" value="stock">
-	</form>
 
-	<br>
-	<b>Mutual Funds</b>
-	<form class="form-inline" role="form" action="NewTransaction"
-		method="post">
-		<br>Choose the company where you wish to invest<br> <select
-			class="form-control" name="mf_company">
-			<%
-				if (session.getAttribute("username") != null)
-					out.print(session.getAttribute("companiesmf"));
-			%>
-		</select> <select class="form-control" name="mf_type">
-			<option>buy</option>
-			<option>sell</option>
-			<option>buy_offer</option>
-			<option>sell_offer</option>
-		</select> <br>Choose the quantity you wish to buy/sell<br> <input
-			type="text" name="mf_quantity"> <br>Choose the price at
-		which you wish to buy/sell<br> <input type="text" name="mf_price">
-		<button type="submit" class="btn btn-default">Submit</button>
-		<input type="hidden" name="classify" value="mf">
-	</form>
+	<div role="tabpanel">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#Stocks" aria-controls="Stocks" role="tab" data-toggle="tab">Stocks</a></li>
+			<li role="presentation"><a href="#MF" aria-controls="MF" role="tab" data-toggle="tab">Mutual Funds</a></li>
+			<li role="presentation"><a href="#Bonds" aria-controls="Bonds" role="tab" data-toggle="tab">Bonds</a></li>
+			<li role="presentation"><a href="#FD" aria-controls="FD" role="tab" data-toggle="tab">Fixed Deposits</a></li>
+		</ul>
 
-	<br>
-	<b>Bonds</b>
-	<form class="form-inline" role="form" action="NewTransaction"
-		method="post">
-		<br>Choose the company where you wish to invest<br> <select
-			class="form-control" name="bonds_company">
-			<%
-				if (session.getAttribute("username") != null)
-					out.print(session.getAttribute("companiesstock"));
-			%>
-			</select>
-			<select class="form-control" name="bonds_type">
-				<option>buy</option>
-				<option>sell</option>
-				<option>buy_offer</option>
-			    <option>sell_offer</option>
-		</select>
-			<br>Choose the quantity you wish to buy/sell
-			<br>
-			<input type="text" name="bonds_quantity">
-			<br>Choose the price at which you wish to buy/sell
-			<br>
-			<input type="text" name="bonds_price">
-			<button type="submit" class="btn btn-default">Submit</button>
-			<input type="hidden" name="classify" value="bonds">
-	</form>
-
-
-	<br>
-	<b>Purchase Fixed deposit</b>
-	<form class="form-inline" role="form" action="NewTransaction"
-		method="post">
- <br>Choose the investment
-		period<br> <select class="form-control" name="fd_period">
-			<option>1 year</option>
-			<option>6 mons</option>
-		</select> <br>Choose the amount you wish to invest<br> <input
-			type="text" name="fd_amount">
-		<button type="submit" class="btn btn-default">Submit</button>
-		<input type="hidden" name="classify" value="fd">
-	</form>
-
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="Stocks">
+				<br>
+				<b>Stock investments</b>
+				<form class="form-inline" role="form" action="NewTransaction"
+					method="post">
+					<br>Choose the company where you wish to invest<br> <select
+						class="form-control" name="stock_company">
+						<%
+							if (session.getAttribute("username") != null)
+								out.print(session.getAttribute("companiesstock"));
+						%>
+					</select> <select class="form-control" name="stock_type">
+						<option>buy</option>
+						<option>sell</option>
+						<option>buy_offer</option>
+						<option>sell_offer</option>
+					</select> <br>Choose the quantity you wish to buy/sell<br> <input
+						type="text" name="stock_quantity"> <br>Choose the
+					price at which you wish to buy/sell<br> <input type="text"
+						name="stock_price">
+					<button type="submit" class="btn btn-default">Submit</button>
+					<input type="hidden" name="classify" value="stock">
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="MF">
+				<br> 
+				<b>MF</b>
+				<form class="form-inline" role="form" action="NewTransaction"
+					method="post">
+					<br>Choose the company where you wish to invest<br> <select
+						class="form-control" name="mf_company">
+						<%
+							if (session.getAttribute("username") != null)
+								out.print(session.getAttribute("companiesmf"));
+						%>
+					</select> <select class="form-control" name="mf_type">
+						<option>buy</option>
+						<option>sell</option>
+						<option>buy_offer</option>
+						<option>sell_offer</option>
+					</select> <br>Choose the quantity you wish to buy/sell<br> <input
+						type="text" name="mf_quantity"> <br>Choose the price
+					at which you wish to buy/sell<br> <input type="text"
+						name="mf_price">
+					<button type="submit" class="btn btn-default">Submit</button>
+					<input type="hidden" name="classify" value="mf">
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="Bonds">
+				<br> <b>Bonds</b>
+				<form class="form-inline" role="form" action="NewTransaction"
+					method="post">
+					<br>Choose the company where you wish to invest<br> <select
+						class="form-control" name="bonds_company">
+						<%
+							if (session.getAttribute("username") != null)
+								out.print(session.getAttribute("companiesstock"));
+						%>
+					</select> <select class="form-control" name="bonds_type">
+						<option>buy</option>
+						<option>sell</option>
+						<option>buy_offer</option>
+						<option>sell_offer</option>
+					</select> <br>Choose the quantity you wish to buy/sell <br> <input
+						type="text" name="bonds_quantity"> <br>Choose the
+					price at which you wish to buy/sell <br> <input type="text"
+						name="bonds_price">
+					<button type="submit" class="btn btn-default">Submit</button>
+					<input type="hidden" name="classify" value="bonds">
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="FD">
+				<br> 
+				<b>Purchase Fixed deposit</b>
+				<form class="form-inline" role="form" action="NewTransaction"
+					method="post">
+					<br>Choose the investment period<br> <select
+						class="form-control" name="fd_period">
+						<option>1 year</option>
+						<option>6 mons</option>
+					</select> <br>Choose the amount you wish to invest<br> <input
+						type="text" name="fd_amount">
+					<button type="submit" class="btn btn-default">Submit</button>
+					<input type="hidden" name="classify" value="fd">
+				</form>
+			</div>
+		</div>
+	</div>
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>
 </body>
