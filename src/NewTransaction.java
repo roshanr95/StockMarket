@@ -59,7 +59,6 @@ public class NewTransaction extends HttpServlet {
 		String mf_quantity=request.getParameter("mf_quantity");
 		String bonds_quantity=request.getParameter("bonds_quantity");
 		String fd_amount=request.getParameter("fd_amount");
-		String fd_type=request.getParameter("fd_type");
 		String stock_type=request.getParameter("stock_type");
 		String mf_type=request.getParameter("mf_type");
 		String bonds_type=request.getParameter("bonds_type");
@@ -111,12 +110,12 @@ public class NewTransaction extends HttpServlet {
 				double user_price=0.0;
 				if(stock_quantity.equals(""))
 				{
-					response.sendRedirect("Transact.jsp");
+					response.sendRedirect("Transact.jsp?res=inpinv");
 					return;
 				}
 				if(stock_price.equals("") && (stock_type.endsWith("offer")))
 				{
-					response.sendRedirect("Transact.jsp");
+					response.sendRedirect("Transact.jsp?res=inpinv");
 					return;
 				}
 				if(stock_type.endsWith("offer"))
@@ -309,55 +308,52 @@ public class NewTransaction extends HttpServlet {
 			}
 			else if(classify.equals("fd"))
 			{
-				if(fd_type.equals("Buy_FD"))
+				double interest=0.0;
+				p = conn.prepareStatement("select interest_rate from fd_rates where duration = ?");
+				PGInterval d= new PGInterval(fd_period);
+				p.setObject(1,d);
+
+				rs = p.executeQuery();
+				while(rs.next())interest=rs.getDouble(1);
+
+				double amount=0.0;
+				if(fd_amount.equals(""))
 				{
-					double interest=0.0;
-					p = conn.prepareStatement("select interest_rate from fd_rates where duration = ?");
-					PGInterval d= new PGInterval(fd_period);
-					p.setObject(1,d);
-
-					rs = p.executeQuery();
-					while(rs.next())interest=rs.getDouble(1);
-
-					double amount=0.0;
-					if(fd_amount.equals(""))
-					{
-						response.sendRedirect("Transact.jsp");
-						return;
-					}
-					amount=Double.parseDouble(fd_amount);
-					if(amount > balance)
-					{
-						response.sendRedirect("Transact.jsp?res=funds");
-					}
-					else
-					{
-						//remove money
-						p = conn.prepareStatement("update users set balance = balance - ? where userid = ?");
-						p.setDouble(1, amount);
-						p.setString(2, username);
-						p.executeUpdate();
+					response.sendRedirect("Transact.jsp?res=inpinv");
+					return;
+				}
+				amount=Double.parseDouble(fd_amount);
+				if(amount > balance)
+				{
+					response.sendRedirect("Transact.jsp?res=funds");
+				}
+				else
+				{
+					//remove money
+					p = conn.prepareStatement("update users set balance = balance - ? where userid = ?");
+					p.setDouble(1, amount);
+					p.setString(2, username);
+					p.executeUpdate();
 
 
-						//Insert into fd
-						p = conn.prepareStatement("INSERT INTO fd_table values(?,?,?,?,?,?)");
-						p.setInt(1, fd_no);
-						p.setString(2, username);
-						p.setDouble(3,amount);
-						p.setDouble(5,interest);
-						Date utilDate = new Date();
-						java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+					//Insert into fd
+					p = conn.prepareStatement("INSERT INTO fd_table values(?,?,?,?,?,?)");
+					p.setInt(1, fd_no);
+					p.setString(2, username);
+					p.setDouble(3,amount);
+					p.setDouble(5,interest);
+					Date utilDate = new Date();
+					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-						p.setDate(4,sqlDate);
-						p.setObject(6, d);
-						p.executeUpdate();
-						response.sendRedirect("Transact.jsp?res=fd_buy");
-						p = conn.prepareStatement("update game_params set value = ? where game_param = 'fd_no'");
-						fd_no++;
+					p.setDate(4,sqlDate);
+					p.setObject(6, d);
+					p.executeUpdate();
+					response.sendRedirect("Transact.jsp?res=fd_buy");
+					p = conn.prepareStatement("update game_params set value = ? where game_param = 'fd_no'");
+					fd_no++;
 
-						p.setString(1, String.valueOf(fd_no));
-						p.executeUpdate();
-					}
+					p.setString(1, String.valueOf(fd_no));
+					p.executeUpdate();
 				}
 			}
 		}catch (SQLException e) {

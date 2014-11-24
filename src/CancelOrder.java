@@ -53,8 +53,7 @@ public class CancelOrder extends HttpServlet {
 		String fd_string = request.getParameter("no");
 		int fd_id = Integer.parseInt(fd_string);
 		try {
-			PreparedStatement p = conn
-					.prepareStatement("SELECT * from fd_table where fd_id= ?");
+			PreparedStatement p = conn.prepareStatement("SELECT * from fd_table where fd_id= ?");
 			p.setInt(1, fd_id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -63,7 +62,7 @@ public class CancelOrder extends HttpServlet {
 			Double rate = rs.getDouble(5);
 			java.sql.Date d = rs.getDate(4);
 			PGInterval dur = (PGInterval) rs.getObject(6);
-			p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? AND day_of_issue + fd_duration > ?");
+			p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? AND day_of_issue + fd_duration < ?");
 			p.setInt(1, fd_id);
 			Date utilDate = new Date();
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());

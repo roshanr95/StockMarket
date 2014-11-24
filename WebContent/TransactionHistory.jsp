@@ -105,7 +105,7 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
@@ -168,7 +168,7 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
@@ -231,7 +231,7 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
@@ -291,7 +291,7 @@
 				<div class="panel-body">
 					<button type="button" class="btn btn-danger" disabled="disabled">Broken Fixed
 						Deposit</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Amount</th>
