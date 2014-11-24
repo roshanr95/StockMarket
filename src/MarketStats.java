@@ -50,10 +50,10 @@ public class MarketStats extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		try {
-			PreparedStatement p = conn.prepareStatement("select name from company where ticker_symbol = ?");
+			PreparedStatement p = conn.prepareStatement("select name,curr_stock_price from company where ticker_symbol = ?");
 			p.setString(1,ticker);
 			ResultSet rs = p.executeQuery();
-			while(rs.next()) session.setAttribute("company_stat_name",rs.getString(1)+"   <small>"+ticker+"</small>");
+			while(rs.next()) session.setAttribute("company_stat_name",rs.getString(1)+"   <small>"+ticker+"<span style=\"float:right\">"+rs.getString(2)+"</span></small>");
 			p = conn.prepareStatement("select * from stock_history where ticker_symbol = ?");
 			p.setString(1,ticker);
 			rs = p.executeQuery();

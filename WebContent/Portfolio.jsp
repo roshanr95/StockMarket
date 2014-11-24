@@ -16,14 +16,22 @@
 	</div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<% if(session.getAttribute("username") != null) out.println("<p class=\"navbar-text\"><strong>Hello "+session.getAttribute("username")+"</strong></p>");%>
+		<%
+			if (session.getAttribute("username") != null)
+				out.println("<p class=\"navbar-text\"><strong>Hello "
+						+ session.getAttribute("username") + "</strong></p>");
+		%>
 		<ul class="nav navbar-nav">
 			<li><a href="Profile.jsp">Profile</a></li>
 			<li class="active"><a href="#">Portfolio <span
 					class="sr-only">(current)</span> </a></li>
 			<li><a href="Transact.jsp">Transact</a></li>
 			<li><a href="TransactionHistory.jsp">Transaction History</a></li>
-			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="post" action="PastTransactions"><button style="padding:0px" class="btn btn-link" type=submit>Order Book</button></form></li>
+			<li style="height: 50px; padding: 15px;"><form
+					style="height: 20px" method="post" action="PastTransactions">
+					<button style="padding: 0px" class="btn btn-link" type=submit>Order
+						Book</button>
+				</form></li>
 			<li><a href="Market.jsp">Market Statistics</a></li>
 		</ul>
 
@@ -42,6 +50,32 @@
 	<!--Rest of the content down here-->
 
 	<legend>Portfolio</legend>
+
+	<dl class="dl-horizontal">
+		<dt>Balance</dt>
+		<dd>
+			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("balance")); %>
+		</dd>
+		<dt>Total Networth</dt>
+		<dd>
+			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("networth")); %>
+		</dd>
+	</dl>
+
+	<button type="button" class="btn btn-success" disabled="disabled">Stocks</button>
+	<button type="button" class="btn btn-warning" disabled="disabled">Mutual Funds</button>
+	<button type="button" class="btn btn-info" disabled="disabled">Bonds</button>
+	<table class="table table-hover table-condensed" style="margin-top: 1%">
+		<tr>
+			<th>Company</th>
+			<th>Ticker Symbol</th>
+			<th>Quantity</th>
+			<th>Current Market Price</th>
+		</tr>
+		<%
+			if (session.getAttribute("username") != null) out.print(session.getAttribute("ownage"));
+		%>
+	</table>
 
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>

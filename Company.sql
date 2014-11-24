@@ -26,6 +26,7 @@
 -- insert into company values('BOM500470','Tata Steel Limited (500470-BY)	',1);
 -- insert into company values('BOM507685','Wipro (WIT)	',1);
 
+-- alter table users drop column networth;
 -- alter table company alter column ticker_symbol type varchar(30);
 -- alter table stock_history alter column ticker_symbol type varchar(30);
 -- alter table ownership alter column ticker_symbol type varchar(30);

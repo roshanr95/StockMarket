@@ -126,11 +126,9 @@
 --  CREATE INDEX userid_fdhist ON fd_history (userid);
 --  CREATE INDEX day_fdhist ON fd_history (day_of_issue);
 --  CREATE INDEX stock_date ON stock_history (day);
---  insert into users values('admin','admin','99999999999','9999999999','admin@gmail.com','admin');
---  insert into users values('sanket','sanket','100000','100000','sanket1729@gmail.com','sanket');
---  insert into users values('karan','karan','100000','100000','sanket1729@gmail.com','karan');
---  insert into users values('rosh','rosh','100000','100000','sanket1729@gmail.com','rosh');
+--  insert into users values('admin','admin','99999999999','admin@gmail.com','admin');
+--  insert into users values('sanket','sanket','100000','sanket1729@gmail.com','sanket');
+--  insert into users values('karan','karan','100000','sanket1729@gmail.com','karan');
+--  insert into users values('rosh','rosh','100000','sanket1729@gmail.com','rosh');
 --  insert into game_params values('fd_no','10000');
 --  insert into game_params values('trans_no','100000');
-
-create view 

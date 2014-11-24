@@ -23,12 +23,11 @@
 		%>
 		<ul class="nav navbar-nav">
 			<li><a href="Profile.jsp">Profile</a></li>
-			<li><a href="Portfolio.jsp">Portfolio</a></li>
+			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="get" action="ChangeDetails"><button style="padding:0px" class="btn btn-link" type=submit>Portfolio</button></form></li>
 			<li><a href="Transact.jsp">Transact</a></li>
 			<li><a href="TransactionHistory.jsp">Transaction History</a></li>
 			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="post" action="PastTransactions"><button style="padding:0px" class="btn btn-link" type=submit>Order Book</button></form></li>
-			<li class="active"><a href="#">Market Statistics<span
-					class="sr-only">(current)</span> </a></li>
+			<li class="active"><a href="#">Market Statistics<span class="sr-only">(current)</span> </a></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
@@ -49,7 +48,7 @@
 
 	<form class="form-inline" role="form" action="MarketStats"
 		method="post">
-		<select class="form-control" name="company">
+		<select class="form-control" name="company" style="width:85%">
 			<%
 				out.print(session.getAttribute("companiesstock"));
 				out.print(session.getAttribute("companiesmf"));

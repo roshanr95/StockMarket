@@ -38,7 +38,38 @@ public class ChangeDetails extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("username");
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement("with balance(amt) as (select balance from users where userid=? union select price*quantity from curr_transact where trans_type='B' and userid=? union select amount from fd_table where userid=? union select quantity*curr_stock_price from company natural join ownership where userid=?) select sum(amt) from balance;");
+			stmt.setString(1, user);
+			stmt.setString(2, user);
+			stmt.setString(3, user);
+			stmt.setString(4, user);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) session.setAttribute("networth", rs.getString(1));
+			stmt = conn.prepareStatement("select balance from users where userid=?");
+			stmt.setString(1,user);
+			rs = stmt.executeQuery();
+			if (rs.next()) session.setAttribute("balance", rs.getString(1));
+			stmt = conn.prepareStatement("select name,ticker_symbol,invest_type,quantity,curr_stock_price from ownership natural join company where userid=?");
+			stmt.setString(1, user);
+			rs = stmt.executeQuery();
+			String result="";
+			while(rs.next()){
+				String status=rs.getString(3);
+				if (status.equals("S")) status="success";
+				else if (status.equals("B")) status="info";
+				else status="warning";
+				result+="<tr class=\""+status+"\"><td>"+rs.getString(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getInt(4)+"</td><td>"+rs.getString(5)+"</td></tr>";
+			}
+			session.setAttribute("ownage",result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("Portfolio.jsp");
 	}
 
 	/**
