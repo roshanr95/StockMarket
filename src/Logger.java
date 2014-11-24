@@ -97,6 +97,9 @@ public class Logger extends HttpServlet {
 			session.setAttribute("stock_prices",null);
 			session.setAttribute("company_stat_name",null);
 			session.setAttribute("companies", null);
+			session.setAttribute("networth", null);
+			session.setAttribute("balance", null);
+			session.setAttribute("ownage", null);
 			response.sendRedirect("Home.jsp");
 		}
 	}

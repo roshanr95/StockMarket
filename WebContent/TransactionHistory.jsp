@@ -23,11 +23,9 @@
 		%>
 		<ul class="nav navbar-nav">
 			<li><a href="Profile.jsp">Profile</a></li>
-			<li><a href="Portfolio.jsp">Portfolio</a></li>
+			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="get" action="ChangeDetails"><button style="padding:0px" class="btn btn-link" type=submit>Portfolio</button></form></li>
 			<li><a href="Transact.jsp">Transact</a></li>
-			<li class="active"><a href="#">Transaction History <span
-					class="sr-only">(current)</span>
-			</a></li>
+			<li class="active"><a href="#">Transaction History <span class="sr-only">(current)</span></a></li>
 			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="post" action="PastTransactions"><button style="padding:0px" class="btn btn-link" type=submit>Order Book</button></form></li>
 			<li><a href="Market.jsp">Market Statistics</a></li>
 		</ul>

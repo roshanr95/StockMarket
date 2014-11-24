@@ -22,22 +22,16 @@
 						+ session.getAttribute("username") + "</strong></p>");
 		%>
 		<ul class="nav navbar-nav">
-			<li><a href="Profile.jsp">Profile</a>
+			<li><a href="Profile.jsp">Profile</a></li>
+			<li style="height: 50px; padding: 15px;"><form style="height:20px" method="get" action="ChangeDetails"><button style="padding:0px" class="btn btn-link" type=submit>Portfolio</button></form></li>
+			<li class="active"><a href="#">Transact <span class="sr-only">(current)</span> </a></li>
+			<li><a href="TransactionHistory.jsp">Transaction History</a></li>
+			<li style="height: 50px; padding: 15px;">
+				<form style="height: 20px" method="post" action="PastTransactions">
+					<button style="padding: 0px" class="btn btn-link" type=submit>Order	Book</button>
+				</form>
 			</li>
-			<li><a href="Portfolio.jsp">Portfolio</a>
-			</li>
-			<li class="active"><a href="#">Transact <span
-					class="sr-only">(current)</span> </a>
-			</li>
-			<li><a href="TransactionHistory.jsp">Transaction History</a>
-			</li>
-			<li style="height: 50px; padding: 15px;"><form
-					style="height: 20px" method="post" action="PastTransactions">
-					<button style="padding: 0px" class="btn btn-link" type=submit>Order
-						Book</button>
-				</form></li>
-			<li><a href="Market.jsp">Market Statistics</a>
-			</li>
+			<li><a href="Market.jsp">Market Statistics</a></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
@@ -83,7 +77,10 @@
 		method="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="stock_company">
-			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("companiesstock")); %>
+			<%
+				if (session.getAttribute("username") != null)
+					out.print(session.getAttribute("companiesstock"));
+			%>
 		</select> <select class="form-control" name="stock_type">
 			<option>buy</option>
 			<option>sell</option>
@@ -103,7 +100,10 @@
 		method="post">
 		<br>Choose the company where you wish to invest<br> <select
 			class="form-control" name="mf_company">
-			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("companiesmf")); %>
+			<%
+				if (session.getAttribute("username") != null)
+					out.print(session.getAttribute("companiesmf"));
+			%>
 		</select> <select class="form-control" name="mf_type">
 			<option>buy</option>
 			<option>sell</option>
