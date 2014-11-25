@@ -53,7 +53,8 @@ public class CancelOrder extends HttpServlet {
 		String fd_string = request.getParameter("no");
 		int fd_id = Integer.parseInt(fd_string);
 		try {
-			PreparedStatement p = conn.prepareStatement("SELECT * from fd_table where fd_id= ?");
+			PreparedStatement p = conn
+					.prepareStatement("SELECT * from fd_table where fd_id= ?");
 			p.setInt(1, fd_id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -75,7 +76,7 @@ public class CancelOrder extends HttpServlet {
 				amount = amount + amount * months * rate / 1200;
 				suc = "Y";
 			}
-			
+
 			try {
 				conn.setAutoCommit(false);
 				// remove from fd_table
@@ -103,15 +104,15 @@ public class CancelOrder extends HttpServlet {
 			} finally {
 				conn.setAutoCommit(true);
 			}
-			
+
 			Utils.setOrderBook(conn, session);
 			response.sendRedirect("OrderBook.jsp?res=break");
-			
+
 			return;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("OrderBook.jsp?res=error");		
+		response.sendRedirect("OrderBook.jsp?res=error");
 	}
 
 	/**
@@ -131,57 +132,65 @@ public class CancelOrder extends HttpServlet {
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
-			
+
 			String type = rs.getString(5);
 			double price = rs.getDouble(6);
 			int quantity = rs.getInt(7);
-			
-			p = conn.prepareStatement("insert into transact_history values(?,?,?,?,?,?,?,?,?)");
-			p.setInt(1, rs.getInt(1));
-			p.setString(2, rs.getString(2));
-			p.setString(3, rs.getString(3));
-			p.setString(4, rs.getString(4));
-			p.setString(5, rs.getString(5));
-			p.setDouble(6, rs.getDouble(6));
-			p.setInt(7, rs.getInt(7));
-			p.setObject(8, rs.getObject(8));
-			p.setString(9, "N");
-			p.executeUpdate();
-			
-			p = conn.prepareStatement("delete from curr_transact where trans_id=?");
-			p.setInt(1, id);
-			p.executeUpdate();
-			
-			if(type.equals("B")) {
-				p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
-				p.setDouble(1, price*quantity);
-				p.setString(2, user);
-				p.executeUpdate();
-			} else {
-				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ? and ticker_symbol = ?; " +
-						"insert into ownership (userid, ticker_symbol, invest_type, quantity) " +
-						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=?)");
-				p.setInt(1, quantity);
-				p.setString(2, user);
+
+			try {
+				conn.setAutoCommit(false);
+				p = conn.prepareStatement("insert into transact_history values(?,?,?,?,?,?,?,?,?)");
+				p.setInt(1, rs.getInt(1));
+				p.setString(2, rs.getString(2));
 				p.setString(3, rs.getString(3));
-				p.setString(4, user);
-				p.setString(8, user);
-				p.setString(5, rs.getString(3));
-				p.setString(9, rs.getString(3));
-				p.setString(6, rs.getString(4));
-				p.setInt(7, quantity);
-				
+				p.setString(4, rs.getString(4));
+				p.setString(5, rs.getString(5));
+				p.setDouble(6, rs.getDouble(6));
+				p.setInt(7, rs.getInt(7));
+				p.setObject(8, rs.getObject(8));
+				p.setString(9, "N");
 				p.executeUpdate();
-				
-//				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?");
-//				p.setInt(1, quantity);
-//				p.setString(2, user);
-//				p.executeUpdate();
-				
+
+				p = conn.prepareStatement("delete from curr_transact where trans_id=?");
+				p.setInt(1, id);
+				p.executeUpdate();
+
+				if (type.equals("B")) {
+					p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
+					p.setDouble(1, price * quantity);
+					p.setString(2, user);
+					p.executeUpdate();
+				} else {
+					p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ? and ticker_symbol = ?; "
+							+ "insert into ownership (userid, ticker_symbol, invest_type, quantity) "
+							+ "select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=?)");
+					p.setInt(1, quantity);
+					p.setString(2, user);
+					p.setString(3, rs.getString(3));
+					p.setString(4, user);
+					p.setString(8, user);
+					p.setString(5, rs.getString(3));
+					p.setString(9, rs.getString(3));
+					p.setString(6, rs.getString(4));
+					p.setInt(7, quantity);
+
+					p.executeUpdate();
+
+					// p =
+					// conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?");
+					// p.setInt(1, quantity);
+					// p.setString(2, user);
+					// p.executeUpdate();
+
+				}
+			} catch (SQLException e) {
+				conn.rollback();
+			} finally {
+				conn.setAutoCommit(true);
 			}
 			Utils.setOrderBook(conn, session);
 			response.sendRedirect("OrderBook.jsp?res=cancel");
-			
+
 			return;
 		} catch (SQLException e) {
 			e.printStackTrace();
