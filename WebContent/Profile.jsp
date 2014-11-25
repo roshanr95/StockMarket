@@ -48,7 +48,7 @@
 	<script src="jquery.js"></script>
 	<script src="bootstrap.js"></script>
 	<h1>
-		<small>Welcome <%=session.getAttribute("username")%></small>
+		<small>Welcome <%=session.getAttribute("name")%></small>
 	</h1>
 	<br />
 
@@ -60,13 +60,13 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-6">
-					<input type="text" name="name" class="form-control">
+					<input value=<%=session.getAttribute("name")%> type="text" name="name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Email</label>
 				<div class="col-sm-6">
-					<input type="email" name="email" class="form-control">
+					<input value=<%=session.getAttribute("mail")%> type="email" name="email" class="form-control">
 				</div>
 			</div>
 			<div class="form-group">
@@ -140,34 +140,66 @@
 
 
 	<div
-		<%if (session.getAttribute("username") != null
+		<%-- <%if (session.getAttribute("username") != null
 					&& session.getAttribute("username").equals("admin")) {
 				out.println("");
 			} else {
 				out.println("class=\"hide\"");
-			}%>
+			}%> --%>
 		style="display: inline-block; width: 45%">
-		<h3 style="margin-left: 20%">Change Game Parameters</h3>
+		<%if (session.getAttribute("username") != null
+					&& session.getAttribute("username").equals("admin")) {
+				out.println("<h3 style=\"margin-left: 10%\">Change Game Parameters</h3>");
+			} else {
+				out.println("<h3 style=\"margin-left: 10%\">Game Parameters</h3>");
+			}%>
+		
 		<br />
-		<form class="form-horizontal" role="form">
+		<form method="post" action="GameParam" class="form-horizontal" role="form">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">FD Rate</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-6">
-					<input type="email" class="form-control">
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<label class="col-sm-2 control-label">FD Rates</label>
+				<div class="col-4">
+					<label class="col-sm-2 control-label">1 year</label>
+					<div class="col-sm-2">
+						<input name="rate" type="number" class="form-control" value=<%out.println(session.getAttribute("fdrate1"));
+						if (session.getAttribute("username") != null
+							&& session.getAttribute("username").equals("admin")) {
+						out.println("");
+					} else out.println("disabled");%>>
+					</div>
+					<%if (session.getAttribute("username") != null
+							&& session.getAttribute("username").equals("admin")) {
+						out.println("<button type=\"submit\" class=\"btn btn-primary\">Change</button>");
+					}%>
 				</div>
 			</div>
 		</form>
+		<form method="get" action="GameParam" class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label"></label>
+				<div class="col-4">
+					<label class="col-sm-2 control-label">6 mons</label>
+					<div class="col-sm-2">
+						<input name="rate" type="number" class="form-control" value=<%out.println(session.getAttribute("fdrate2"));
+						if (session.getAttribute("username") != null
+							&& session.getAttribute("username").equals("admin")) {
+						out.println("");
+					} else out.println("disabled");%>>
+					</div>
+					<%if (session.getAttribute("username") != null
+							&& session.getAttribute("username").equals("admin")) {
+						out.println("<button type=\"submit\" class=\"btn btn-primary\">Change</button>");
+					}%>
+				</div>
+			</div>
+		</form>
+		<%
+		if (request.getParameter("res3") == null)
+			out.println("<div style=\"display: inline-block; width: 45%\" class=\"alert\" role=\"alert\"></div>");
+		else if (request.getParameter("res3").equals("success"))
+			out.println("<div style=\"display: inline-block; width: 75%\" class=\"alert alert-success\" role=\"alert\"><strong>Done!</strong></div>");
+	%>
 	</div>
+	
 </body>
 </html>

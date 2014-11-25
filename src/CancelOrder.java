@@ -53,8 +53,7 @@ public class CancelOrder extends HttpServlet {
 		String fd_string = request.getParameter("no");
 		int fd_id = Integer.parseInt(fd_string);
 		try {
-			PreparedStatement p = conn
-					.prepareStatement("SELECT * from fd_table where fd_id= ?");
+			PreparedStatement p = conn.prepareStatement("SELECT * from fd_table where fd_id= ?");
 			p.setInt(1, fd_id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
@@ -63,7 +62,7 @@ public class CancelOrder extends HttpServlet {
 			Double rate = rs.getDouble(5);
 			java.sql.Date d = rs.getDate(4);
 			PGInterval dur = (PGInterval) rs.getObject(6);
-			p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? AND day_of_issue + fd_duration > ?");
+			p = conn.prepareStatement("SELECT * from fd_table where fd_id= ? AND day_of_issue + fd_duration < ?");
 			p.setInt(1, fd_id);
 			Date utilDate = new Date();
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -76,25 +75,35 @@ public class CancelOrder extends HttpServlet {
 				amount = amount + amount * months * rate / 1200;
 				suc = "Y";
 			}
-			// remove from fd_table
-			p = conn.prepareStatement("delete from fd_table where fd_id= ?");
-			p.setInt(1, fd_id);
-			p.executeUpdate();
-			// Add to fd_history
-			p = conn.prepareStatement("insert into fd_history values(?,?,?,?,?,?,?)");
-			p.setInt(1, fd_id);
-			p.setString(2, username);
-			p.setDouble(3, ini_amount);
-			p.setDate(4, d);
-			p.setDouble(5, rate);
-			p.setObject(6, dur);
-			p.setString(7, suc);
-			p.executeUpdate();
-			// give money to users
-			p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
-			p.setDouble(1, amount);
-			p.setString(2, username);
-			p.executeUpdate();
+			
+			try {
+				conn.setAutoCommit(false);
+				// remove from fd_table
+				p = conn.prepareStatement("delete from fd_table where fd_id= ?");
+				p.setInt(1, fd_id);
+				p.executeUpdate();
+				// Add to fd_history
+				p = conn.prepareStatement("insert into fd_history values(?,?,?,?,?,?,?)");
+				p.setInt(1, fd_id);
+				p.setString(2, username);
+				p.setDouble(3, ini_amount);
+				p.setDate(4, d);
+				p.setDouble(5, rate);
+				p.setObject(6, dur);
+				p.setString(7, suc);
+				p.executeUpdate();
+				// give money to users
+				p = conn.prepareStatement("update users set balance = balance + ? where userid = ?");
+				p.setDouble(1, amount);
+				p.setString(2, username);
+				p.executeUpdate();
+				conn.commit();
+			} catch (SQLException e) {
+				conn.rollback();
+			} finally {
+				conn.setAutoCommit(true);
+			}
+			
 			Utils.setOrderBook(conn, session);
 			response.sendRedirect("OrderBook.jsp?res=break");
 			
@@ -149,19 +158,18 @@ public class CancelOrder extends HttpServlet {
 				p.setString(2, user);
 				p.executeUpdate();
 			} else {
-				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ?; " +
+				p = conn.prepareStatement("update ownership set quantity = quantity + ? where userid = ? and ticker_symbol = ?; " +
 						"insert into ownership (userid, ticker_symbol, invest_type, quantity) " +
-						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=? and invest_type=? and quantity=?)");
+						"select ?,?,?,? where not exists(select * from ownership where userid=? and ticker_symbol=?)");
 				p.setInt(1, quantity);
 				p.setString(2, user);
-				p.setString(3, user);
-				p.setString(7, user);
-				p.setString(4, rs.getString(3));
-				p.setString(8, rs.getString(3));
-				p.setString(5, rs.getString(4));
-				p.setString(9, rs.getString(4));
-				p.setInt(6, quantity);
-				p.setInt(10, quantity);
+				p.setString(3, rs.getString(3));
+				p.setString(4, user);
+				p.setString(8, user);
+				p.setString(5, rs.getString(3));
+				p.setString(9, rs.getString(3));
+				p.setString(6, rs.getString(4));
+				p.setInt(7, quantity);
 				
 				p.executeUpdate();
 				

@@ -78,10 +78,11 @@
 			<div id="Stocks" class="panel-collapse collapse in" role="tabpanel"
 				aria-labelledby="headStocks">
 				<div class="panel-body">
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -137,10 +138,11 @@
 			<div id="Bonds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headBonds">
 				<div class="panel-body">
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -195,10 +197,11 @@
 			<div id="MFunds" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headMFunds">
 				<div class="panel-body">
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -254,7 +257,7 @@
 			<div id="FD" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="headFD">
 				<div class="panel-body">
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Amount</th>

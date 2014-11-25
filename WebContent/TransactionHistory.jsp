@@ -105,10 +105,11 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -121,7 +122,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[7].equals("N") ? "class=\"danger\"" : (resArr[3].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -167,10 +168,11 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -183,7 +185,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[7].equals("N") ? "class=\"danger\"" : (resArr[3].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -229,10 +231,11 @@
 					<button type="button" class="btn btn-success" disabled="disabled">Successful
 						Sell</button>
 					<button type="button" class="btn btn-info" disabled="disabled">Successful Buy</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Ticker</th>
+							<th>Name</th>
 							<th>Kind</th>
 							<th>Price</th>
 							<th>Quantity</th>
@@ -245,7 +248,7 @@
 								String[] toparr = res.split(";");
 								for (int j = 0; j < toparr.length; j++) {
 									String[] resArr = toparr[j].split(",");
-									out.println("<tr " + (resArr[6].equals("N") ? "class=\"danger\"" : (resArr[2].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
+									out.println("<tr " + (resArr[7].equals("N") ? "class=\"danger\"" : (resArr[3].equals("B") ? "class=\"info\"" : "class=\"success\"")) + ">");
 									for (int i = 0; i < resArr.length; i++) {
 										out.println("<td>" + resArr[i] + "</td>");
 									}
@@ -288,7 +291,7 @@
 				<div class="panel-body">
 					<button type="button" class="btn btn-danger" disabled="disabled">Broken Fixed
 						Deposit</button>
-					<table class="table" style="margin-top: 1%">
+					<table class="table table-hover table-condensed" style="margin-top: 1%">
 						<tr>
 							<th>ID</th>
 							<th>Amount</th>

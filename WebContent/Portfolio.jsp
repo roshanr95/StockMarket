@@ -50,21 +50,20 @@
 	<!--Rest of the content down here-->
 
 	<legend>Portfolio</legend>
-
-	<dl class="dl-horizontal">
-		<dt>Balance</dt>
-		<dd>
-			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("balance")); %>
-		</dd>
-		<dt>Total Networth</dt>
-		<dd>
-			<% if(session.getAttribute("username")!=null) out.print(session.getAttribute("networth")); %>
-		</dd>
-	</dl>
-
-	<button type="button" class="btn btn-success" disabled="disabled">Stocks</button>
-	<button type="button" class="btn btn-warning" disabled="disabled">Mutual Funds</button>
-	<button type="button" class="btn btn-info" disabled="disabled">Bonds</button>
+	<div style="display:inline-block;width:100%">
+	<div style="float:left;margin-left:10%"><h4>Balance : <small><% if(session.getAttribute("username")!=null) out.print(session.getAttribute("balance")); %></small></h4></div>
+	<div style="float:right;margin-right:10%"><h4>Networth : <small><% if(session.getAttribute("username")!=null) out.print(session.getAttribute("networth")); %></small></h4></div>
+	</div>
+	<br><br>
+	<div style="display:inline-block;width:100%">
+		<div style="float:left"><h3>Currently Held Assets</h3></div>
+		<div class="btn-group" role="group" style="float:right">
+			<button type="button" class="btn btn-success" disabled="disabled">Stocks</button>
+			<button type="button" class="btn btn-warning" disabled="disabled">Mutual Funds</button>
+			<button type="button" class="btn btn-info" disabled="disabled">Bonds</button>
+		</div>
+	</div>
+	<br>
 	<table class="table table-hover table-condensed" style="margin-top: 1%">
 		<tr>
 			<th>Company</th>

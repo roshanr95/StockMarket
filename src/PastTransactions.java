@@ -67,7 +67,7 @@ public class PastTransactions extends HttpServlet {
 		Timestamp endt = new Timestamp(end.getTime());
 		
 		try {
-			PreparedStatement stmt = conn.prepareStatement("select * from transact_history where userid = ? and invest_type='S' and time between ? and ?;");
+			PreparedStatement stmt = conn.prepareStatement("select * from transact_history natural join company where userid = ? and invest_type='S' and time between ? and ?;");
 			stmt.setString(1, user);
 			stmt.setTimestamp(2, startt);
 			stmt.setTimestamp(3, endt);
@@ -75,7 +75,7 @@ public class PastTransactions extends HttpServlet {
 			String res="";
 			
 			while(rs.next()) {
-				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+				String r = String.valueOf(rs.getInt(2)) + "," + rs.getString(1) + "," + rs.getString(10) + "," + 
 							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
 							rs.getTimestamp(8) + "," + rs.getString(9);
 				res = res + r + ";";
@@ -88,7 +88,7 @@ public class PastTransactions extends HttpServlet {
 		}
 		
 		try {
-			PreparedStatement stmt = conn.prepareStatement("select * from transact_history where userid = ? and invest_type='MF' and time between ? and ?;");
+			PreparedStatement stmt = conn.prepareStatement("select * from transact_history natural join company where userid = ? and invest_type='MF' and time between ? and ?;");
 			stmt.setString(1, user);
 			stmt.setTimestamp(2, startt);
 			stmt.setTimestamp(3, endt);
@@ -96,7 +96,7 @@ public class PastTransactions extends HttpServlet {
 			String res="";
 			
 			while(rs.next()) {
-				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+				String r = String.valueOf(rs.getInt(2)) + "," + rs.getString(1) + "," + rs.getString(10) + "," + 
 							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
 							rs.getTimestamp(8) + "," + rs.getString(9);
 				res = res + r + ";";
@@ -109,7 +109,7 @@ public class PastTransactions extends HttpServlet {
 		}
 		
 		try {
-			PreparedStatement stmt = conn.prepareStatement("select * from transact_history where userid = ? and invest_type='B' and time between ? and ?;");
+			PreparedStatement stmt = conn.prepareStatement("select * from transact_history natural join company where userid = ? and invest_type='B' and time between ? and ?;");
 			stmt.setString(1, user);
 			stmt.setTimestamp(2, startt);
 			stmt.setTimestamp(3, endt);
@@ -117,7 +117,7 @@ public class PastTransactions extends HttpServlet {
 			String res="";
 			
 			while(rs.next()) {
-				String r = String.valueOf(rs.getInt(1)) + "," + rs.getString(3) + "," + 
+				String r = String.valueOf(rs.getInt(2)) + "," + rs.getString(1) + "," + rs.getString(10) + "," + 
 							rs.getString(5) + "," + String.valueOf(rs.getFloat(6)) + "," + String.valueOf(rs.getInt(7)) + "," +
 							rs.getTimestamp(8) + "," + rs.getString(9);
 				res = res + r + ";";
