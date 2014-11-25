@@ -125,6 +125,8 @@ public class ChangeDetails extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		session.setAttribute("name", name);
+		session.setAttribute("mail", email);
 		response.sendRedirect("Profile.jsp?res1=success");
 	}
 
