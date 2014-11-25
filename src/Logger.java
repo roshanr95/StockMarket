@@ -60,16 +60,20 @@ public class Logger extends HttpServlet {
 						
 						String str="<optgroup label=\"Stocks\">";
 						String str2="<optgroup label=\"Mutual Funds\">";
+						String str3="<optgroup label=\"Bonds\">";
 						p=conn.prepareStatement("select ticker_symbol,name from company");
 						ResultSet rs2 = p.executeQuery();
 						while(rs2.next()) {
 							if(rs2.getString(1).substring(0,3).equals("BOM")) str+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
+							else if(rs2.getString(1).substring(0,3).equals("INE")) str3+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
 							else str2+="<option value='"+rs2.getString(1)+"'>"+rs2.getString(2)+"</option>";
 						}	
 						str+="</optgroup>";
 						session.setAttribute("companiesstock",str);
 						str2+="</optgroup>";
+						str3+="</optgroup>";
 						session.setAttribute("companiesmf",str2);					
+						session.setAttribute("companiesbond",str3);					
 						session.setAttribute("username", username);
 						session.setAttribute("name", rs.getString(2));
 						session.setAttribute("mail", rs.getString(3));
@@ -100,6 +104,9 @@ public class Logger extends HttpServlet {
 			session.setAttribute("stock_prices",null);
 			session.setAttribute("company_stat_name",null);
 			session.setAttribute("companies", null);
+			session.setAttribute("companiesstock", null);
+			session.setAttribute("companiesmf", null);
+			session.setAttribute("companiesbond", null);
 			session.setAttribute("networth", null);
 			session.setAttribute("balance", null);
 			session.setAttribute("ownage", null);

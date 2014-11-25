@@ -52,6 +52,7 @@
 			<%
 				out.print(session.getAttribute("companiesstock"));
 				out.print(session.getAttribute("companiesmf"));
+				out.print(session.getAttribute("companiesbond"));
 			%>
 		</select>
 		<button type="submit" class="btn btn-default">Check

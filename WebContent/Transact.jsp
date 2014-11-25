@@ -188,7 +188,7 @@
 							<select class="form-control" name="bonds_company" id="bonds_company">
 								<%
 									if (session.getAttribute("username") != null)
-										out.print(session.getAttribute("companiesstock"));
+										out.print(session.getAttribute("companiesbond"));
 								%>
 							</select>
 						</div>
